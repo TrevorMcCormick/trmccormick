@@ -14,6 +14,7 @@
         {{- end -}}
         <div class="post-info-line">
             {{- with .Site.Params.dateformat | default "2006-01-02" | .Lastmod.Format -}}
+            <!-- 
             <div class="post-info-mod">
                 <span>
                 {{- dict "Date" . | T "updatedOnDate" -}}
@@ -26,6 +27,7 @@
                 {{- end -}}
                 </span>
             </div>
+            -->
             {{- end -}}
             <div class="post-info-mod">
                 {{- if $params.linktomarkdown -}}
