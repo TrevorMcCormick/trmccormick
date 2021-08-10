@@ -1,21 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>All Posts - trmccormick</title>
-        <link>https://trmccormick.com/posts/</link>
-        <description>All Posts | trmccormick</description>
+        <title>Certifications - Category - trmccormick</title>
+        <link>https://trmccormick.com/categories/certifications/</link>
+        <description>Certifications - Category - trmccormick</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</managingEditor>
-            <webMaster>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</webMaster><lastBuildDate>Wed, 02 Jun 2021 11:20:22 -0400</lastBuildDate><atom:link href="https://trmccormick.com/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</webMaster><lastBuildDate>Wed, 02 Jun 2021 11:20:22 -0400</lastBuildDate><atom:link href="https://trmccormick.com/categories/certifications/" rel="self" type="application/rss+xml" /><item>
     <title>How to Study for the AWS Certified Solutions Architect Associate Exam</title>
     <link>https://trmccormick.com/aws_certified_solutions_architect_associate/</link>
     <pubDate>Wed, 02 Jun 2021 11:20:22 -0400</pubDate><author>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</author><guid>https://trmccormick.com/aws_certified_solutions_architect_associate/</guid>
     <description><![CDATA[Background There is no better preparation than hands-on experience with AWS. Before I attempted this certification exam, I had about two years of experience working across AWS, primarily using services to build my website and handle data ingestion and warehousing processes at work. I had drawn out some simple architecture documents up to this point, and I could generally describe what was happening. However, I knew that in order to pass the exam, I would need to strengthen my understanding of services I was already familiar with (S3, RDS, IAM), and spend a significant amount of time learning the ones I did not use day to day (VPC, Route53, Networking, etc).]]></description>
-</item>
-<item>
-    <title>How To Query PostgreSQL in AWS RDS with Python</title>
-    <link>https://trmccormick.com/aws_rds_postgres_python/</link>
-    <pubDate>Thu, 04 Feb 2021 11:20:22 -0400</pubDate><author>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</author><guid>https://trmccormick.com/aws_rds_postgres_python/</guid>
-    <description><![CDATA[In this post I&rsquo;ll walk through:
- how to create a public PostgreSQL instance in RDS using free-tier how to create a table and load it with data from a csv file how to query data from that table using psycopg2  PostgreSQL on RDS The only thing you have to do in the AWS console is create a Postgres DB instance and make sure it is open to the public (just for this example).]]></description>
 </item>
 <item>
     <title>How to Study for the AWS Certified Cloud Practitioner Exam</title>
@@ -23,13 +16,6 @@
     <pubDate>Sun, 04 Oct 2020 19:08:22 -0400</pubDate><author>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</author><guid>https://trmccormick.com/aws_certified_cloud_practitioner/</guid>
     <description><![CDATA[Cloud Foundations The AWS Certified Cloud Practitioner Exam assumes you have some familiarity with cloud concepts. If you&rsquo;re completely unfamiliar with those, it may benefit you to learn or review some introductory computing concepts. When I was in college, I completed two courses that gave me a great foundation:
  Stanford CS 101 - Introduction to Computing Principles Harvard CS50 - Introduction to Computer Science  This course features one of my favorite professors of all time &ndash; David Malan.]]></description>
-</item>
-<item>
-    <title>Build a Serverless Hugo Blog on AWS for $0.50 per month</title>
-    <link>https://trmccormick.com/build_hugo_on_aws/</link>
-    <pubDate>Sun, 02 Aug 2020 11:20:22 -0400</pubDate><author>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</author><guid>https://trmccormick.com/build_hugo_on_aws/</guid>
-    <description><![CDATA[This post assumes you already have some familiarity with Hugo for building a blog, and you have set up a free-tier AWS account. You don&rsquo;t have to be an expert at either Hugo or AWS to follow along with the guide below. Really the only requirement is that you&rsquo;re able to follow the Hugo quick start guide.
-Below is an AWS architecture diagram I created using diagrams.net, the free version of draw.]]></description>
 </item>
 </channel>
 </rss>

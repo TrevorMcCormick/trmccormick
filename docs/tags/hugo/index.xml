@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Hugo - Tag - trmccormick</title>
+        <link>https://trmccormick.com/tags/hugo/</link>
+        <description>Hugo - Tag - trmccormick</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</managingEditor>
+            <webMaster>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</webMaster><lastBuildDate>Sun, 02 Aug 2020 11:20:22 -0400</lastBuildDate><atom:link href="https://trmccormick.com/tags/hugo/" rel="self" type="application/rss+xml" /><item>
+    <title>Build a Serverless Hugo Blog on AWS for $0.50 per month</title>
+    <link>https://trmccormick.com/build_hugo_on_aws/</link>
+    <pubDate>Sun, 02 Aug 2020 11:20:22 -0400</pubDate><author>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</author><guid>https://trmccormick.com/build_hugo_on_aws/</guid>
+    <description><![CDATA[This post assumes you already have some familiarity with Hugo for building a blog, and you have set up a free-tier AWS account. You don&rsquo;t have to be an expert at either Hugo or AWS to follow along with the guide below. Really the only requirement is that you&rsquo;re able to follow the Hugo quick start guide.
+Below is an AWS architecture diagram I created using diagrams.net, the free version of draw.]]></description>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Build a Serverless Hugo Blog on AWS for $0.50 per month - trmccormick</title><meta name="description" content=""><meta property="og:title" content="Build a Serverless Hugo Blog on AWS for $0.50 per month" />
+<meta property="og:description" content="This post assumes you already have some familiarity with Hugo for building a blog, and you have set up a free-tier AWS account. You don&rsquo;t have to be an expert at either Hugo or AWS to follow along with the guide below. Really the only requirement is that you&rsquo;re able to follow the Hugo quick start guide.
+Below is an AWS architecture diagram I created using diagrams.net, the free version of draw." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://trmccormick.com/build_hugo_on_aws/" /><meta property="og:image" content="https://trmccormick.com/build_hugo_on_aws/main.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-08-02T11:20:22-04:00" />
+<meta property="article:modified_time" content="2021-08-09T19:59:55-04:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://trmccormick.com/build_hugo_on_aws/main.png"/>
+<meta name="twitter:title" content="Build a Serverless Hugo Blog on AWS for $0.50 per month"/>
+<meta name="twitter:description" content="This post assumes you already have some familiarity with Hugo for building a blog, and you have set up a free-tier AWS account. You don&rsquo;t have to be an expert at either Hugo or AWS to follow along with the guide below. Really the only requirement is that you&rsquo;re able to follow the Hugo quick start guide.
+Below is an AWS architecture diagram I created using diagrams.net, the free version of draw."/>
+<meta name="application-name" content="trmccormick">
+<meta name="apple-mobile-web-app-title" content="trmccormick"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="images/m_logo_transparent.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://trmccormick.com/build_hugo_on_aws/" /><link rel="next" href="https://trmccormick.com/aws_certified_cloud_practitioner/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Build a Serverless Hugo Blog on AWS for $0.50 per month",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/trmccormick.com\/build_hugo_on_aws\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/trmccormick.com\/build_hugo_on_aws\/main.png",
+                            "width":  1500 ,
+                            "height":  600 
+                        }],"genre": "posts","keywords": "AWS, Hugo","wordcount":  1458 ,
+        "url": "https:\/\/trmccormick.com\/build_hugo_on_aws\/","datePublished": "2020-08-02T11:20:22-04:00","dateModified": "2021-08-09T19:59:55-04:00","publisher": {
+            "@type": "Organization",
+            "name": "Trevor McCormick"},"author": {
+                "@type": "Person",
+                "name": "Trevor McCormick"
+            },"description": ""
+    }
+    </script></head><body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="trmccormick"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/m_logo_transparent.png"
+        data-srcset="/images/m_logo_transparent.png, /images/m_logo_transparent.png 1.5x, /images/m_logo_transparent.png 2x"
+        data-sizes="auto"
+        alt="/images/m_logo_transparent.png"
+        title="/images/m_logo_transparent.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> 👨🏻‍💻 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="trmccormick"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/m_logo_transparent.png"
+        data-srcset="/images/m_logo_transparent.png, /images/m_logo_transparent.png 1.5x, /images/m_logo_transparent.png 2x"
+        data-sizes="auto"
+        alt="/images/m_logo_transparent.png"
+        title="/images/m_logo_transparent.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">👨🏻‍💻</a><div class="menu-item"><a href="javascript:void(0);" class="theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/build_hugo_on_aws/main.png"
+        data-srcset="/build_hugo_on_aws/main.png, /build_hugo_on_aws/main.png 1.5x, /build_hugo_on_aws/main.png 2x"
+        data-sizes="auto"
+        alt="/build_hugo_on_aws/main.png"
+        title="/build_hugo_on_aws/main.png" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Build a Serverless Hugo Blog on AWS for $0.50 per month</h2><div class="post-meta">
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-08-02">2020-08-02</time></span>&nbsp;</div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>Contents</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#route53">Route53</a></li>
+    <li><a href="#cloudfront">Cloudfront</a></li>
+    <li><a href="#s3">S3</a></li>
+    <li><a href="#hugo">Hugo</a></li>
+    <li><a href="#github">GitHub</a></li>
+    <li><a href="#codebuild">CodeBuild</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><p>This post assumes you already have some familiarity with <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer">Hugo</a> for building a blog, and you have set up a <a href="https://aws.amazon.com/free/" target="_blank" rel="noopener noreffer">free-tier AWS account</a>. You don&rsquo;t have to be an expert at either Hugo or AWS to follow along with the guide below. Really the only requirement is that you&rsquo;re able to <a href="https://gohugo.io/getting-started/quick-start/" target="_blank" rel="noopener noreffer">follow the Hugo quick start guide</a>.</p>
+<p>Below is an AWS architecture diagram I created using <a href="diagrams.net" rel="">diagrams.net</a>, the free version of draw.io. This diagram visualizes how my website runs for just $0.50 a month (exc;uding the $12/year domain name registration). While making this, I was a little fuzzy on how Route53 actually worked, so I included some additional detail on how it interfaces with an example ISP. Here are the main steps I&rsquo;ll talk about in this diagram:</p>
+<ol>
+<li><strong>Route53</strong> &ndash; registering a domain, validating it, and routing traffic to Cloudfront</li>
+<li><strong>Cloudfront</strong> &ndash; mapping your S3 bucket endpoint</li>
+<li><strong>S3</strong> &ndash; hosting your blog as a static website</li>
+<li>Your Code &ndash; generating a Hugo blog</li>
+<li><strong>GitHub</strong> &ndash; hosting your code</li>
+<li><strong>CodeBuild</strong> &ndash; building your Hugo site (CI/CD)</li>
+</ol>
+<figure><img src="/trmccormick.com.jpg" width="80%"/>
+</figure>
+
+<h2 id="route53">Route53</h2>
+<p>I pay $0.50 per month for one hosted zone on <a href="https://aws.amazon.com/route53/" target="_blank" rel="noopener noreffer">Route53</a>. AWS actually created this hosted zone for me when I purchased my domain through Route53.</p>
+<ul>
+<li>Once you purchase a domain, you need to obtain the SSL/TLS certificate through ACM to identify the site over the Internet. <a href="https://aws.amazon.com/blogs/security/easier-certificate-validation-using-dns-with-aws-certificate-manager/" target="_blank" rel="noopener noreffer">Here is exactly how you do that</a>.</li>
+</ul>
+<p>So far you should have 2 DNS records set up from Route53 (NS, SOA) and 1 or more records set up from ACM (CNAMEs). Later you&rsquo;ll add an A record to route traffic to your Cloudfront distribution for each CNAME record. If you&rsquo;re interested in the piece of the diagram focused on connecting to the Internet and the relationship between ISPs and Route53, I learned a lot from <a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/welcome-dns-service.html" target="_blank" rel="noopener noreffer">How internet traffic is routed to your website or web application</a>.</p>
+<h2 id="cloudfront">Cloudfront</h2>
+<p><a href="https://aws.amazon.com/cloudfront/" target="_blank" rel="noopener noreffer">Cloudfront</a> speeds up website load times by storing the build assets at edge locations close to people viewing your blog.</p>
+<ul>
+<li>AWS wants you to select the Origin Domain Name from a dropdown, but you&rsquo;ll want to paste in the actual endpoint to your s3 bucket that contains your Hugo build. For example, mine is <a href="http://trmccormick.com.s3-website.us-east-2.amazonaws.com/" target="_blank" rel="noopener noreffer">http://trmccormick.com.s3-website.us-east-2.amazonaws.com/</a>.</li>
+<li>You&rsquo;ll be able to leave a lot of the settings in Cloudfront to their defaults. I chose to use automatic object compression, and I changed the price class so that I&rsquo;m only using edge locations in North America.</li>
+<li>You&rsquo;ll want to map your domain name(s) in the section &ldquo;Alternate Domain Names (CNAMES).&rdquo; I have two: trmccormick.com and <a href="http://www.trmccormick.com" target="_blank" rel="noopener noreffer">www.trmccormick.com</a>, so I just need to go to Route53 and grab those values.</li>
+<li>Once your distribution has been created and is successfully deployed, you&rsquo;ll see a Cloudfront distribution for each domain name you added in the last bullet point. In the Route53 section, I mentioned you&rsquo;ll want to add A records for these Cloudfront domain names. So go over to Route53 and do that so users are re-routed from your domain to a Cloudfront location closest to them.</li>
+</ul>
+<h2 id="s3">S3</h2>
+<p><a href="https://aws.amazon.com/s3/" target="_blank" rel="noopener noreffer">S3</a> is super easy to figure out: you just upload your /public/ folder that Hugo builds when you run <code>hugo -D</code> on your local machine.</p>
+<ul>
+<li>Create an s3 bucket with the name of your website (or whatever name you want, actually)</li>
+<li>Make the entire bucket public. Easiest way to do this is to go to the Permissions section of your S3 bucket and edit the Bucket Policy to look like the following, replacing your bucket name with mine:</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;Version&#34;</span><span class="p">:</span> <span class="s2">&#34;2012-10-17&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;Statement&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;Sid&#34;</span><span class="p">:</span> <span class="s2">&#34;AllowPublicRead&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Principal&#34;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&#34;AWS&#34;</span><span class="p">:</span> <span class="s2">&#34;*&#34;</span>
+            <span class="p">},</span>
+            <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="s2">&#34;s3:GetObject&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="s2">&#34;arn:aws:s3:::trmccormick.com/*&#34;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Finally upload your /public/ folder created from your local machine</li>
+</ul>
+<p>If you&rsquo;ve followed the steps, your blog should start appearing when you visit your domain. It should score pretty highly on <a href="https://developers.google.com/speed/pagespeed/insights/" target="_blank" rel="noopener noreffer">Google Page Speed Insights</a> for several reasons. If you go to that site and type in your domain, you&rsquo;ll see why your website is fast, and how you might be able to speed it up even further.</p>
+<p>Each time you make any changes to your Hugo site, you&rsquo;d need to overwrite all of the files in your S3 bucket. That&rsquo;s fine if you want to keep it pretty simple. If you&rsquo;re creating a lot of content or making frequent changes to your Hugo site, you probably want to work through the next sections that help you automate that task using GitHub and CodeBuild.</p>
+<h2 id="hugo">Hugo</h2>
+<p>I won&rsquo;t tell you how you should organize your Hugo build, but there is one specific thing you&rsquo;ll need to add into your git repository: a build spec. This is basically an instructions file. With CodeBuild, you&rsquo;ll be telling a fresh computer how to build your site. There will be modules it needs to install, files it needs to build, and it will need to know what to do with the files it builds. Below is my <code>buildspec.yml</code> file in the root directory of my code repository.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="m">0.2</span><span class="w">
+</span><span class="w">
+</span><span class="w"></span><span class="nt">phases</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">install</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">commands</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">echo Entered the install phase...</span><span class="w">
+</span><span class="w">      </span>- <span class="l">yum install curl</span><span class="w">
+</span><span class="w">      </span>- <span class="l">yum install asciidoctor -y</span><span class="w">
+</span><span class="w">      </span>- <span class="l">curl -s -L https://github.com/gohugoio/hugo/releases/download/v0.80.0/hugo_0.80.0_Linux-64bit.deb -o hugo.deb</span><span class="w">
+</span><span class="w">      </span>- <span class="l">dpkg -i hugo.deb</span><span class="w">
+</span><span class="w">    </span><span class="nt">finally</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">echo Installation done</span><span class="w">
+</span><span class="w">  </span><span class="nt">build</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">commands</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">echo Building ...</span><span class="w">
+</span><span class="w">      </span>- <span class="l">echo Build started on `date`</span><span class="w">
+</span><span class="w">      </span>- <span class="l">cd $CODEBUILD_SRC_DIR</span><span class="w">
+</span><span class="w">      </span>- <span class="l">hugo --quiet</span><span class="w">
+</span><span class="w">      </span>- <span class="l">aws s3 sync --delete public/ s3://your-bucket</span><span class="w">
+</span><span class="w">      </span>- <span class="l">aws cloudfront create-invalidation --distribution-id xxx --paths &#39;/*&#39;</span><span class="w">
+</span><span class="w">    </span><span class="nt">finally</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="l">echo Build finished</span><span class="w">
+</span><span class="w"></span><span class="nt">artifacts</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="nt">files</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="s1">&#39;**/*&#39;</span><span class="w">
+</span><span class="w">  </span><span class="nt">base-directory</span><span class="p">:</span><span class="w"> </span><span class="l">$CODEBUILD_SRC_DIR/public</span><span class="w">
+</span><span class="w">  </span><span class="nt">discard-paths</span><span class="p">:</span><span class="w"> </span><span class="kc">no</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Three things to note here:</p>
+<ul>
+<li>We&rsquo;re using commands <code>yum install</code> because we&rsquo;ll be using AWS Linux as our environment machine in CodeBuild. If you run into trouble here, it&rsquo;s because you&rsquo;ve selected a different build environment in CodeBuild.</li>
+<li>You&rsquo;ll want to change the s3:// location to reflect your bucket name. This line sends the contents inside of the /public/ folder from your build environment to your s3 bucket, deleting whatever is currently in the bucket.</li>
+<li>You&rsquo;ll need to create a <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html" target="_blank" rel="noopener noreffer">Cloudfront invalidation</a> across the edge locations where your site has been downloaded. This basically just means you&rsquo;re clearing everyone&rsquo;s cache right now, instead of waiting for the cache to expire.</li>
+</ul>
+<h2 id="github">GitHub</h2>
+<p>If you&rsquo;ve never used <a href="https://github.com/" target="_blank" rel="noopener noreffer">GitHub</a>, it&rsquo;s super simple to set up. You&rsquo;ll create an account, set up a new repository (name it something creative like&hellip; blog). I&rsquo;ll let <a href="https://docs.github.com/en/github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line" target="_blank" rel="noopener noreffer">GitHub explain the rest</a>.</p>
+<h2 id="codebuild">CodeBuild</h2>
+<p>In <a href="https://aws.amazon.com/codebuild/" target="_blank" rel="noopener noreffer">CodeBuild</a>, you&rsquo;re able to set up a webhook to your GitHub repository, which essentially means GitHub is sending a notifcation to CodeBuild every time code is pushed to the main branch.</p>
+<ul>
+<li>First, configure your Source to be your GitHub repository.</li>
+<li>Second, change your Environment OS to Amazon Linux 2. It can be a standard runtime with the most recent image.</li>
+<li>Third, you&rsquo;ll want to create a new service role. More on that in a second.</li>
+<li>Last, you probably want to activate CloudWatch logs so you can see log output of the build. This is necessary for debugging. You&rsquo;ll be able to quickly isolate problems and fix them in AWS or in your buildspec.</li>
+</ul>
+<p>Okay back to the service role. CodeBuild needs to work with s3 and Cloudfront, so you&rsquo;ll have to go to IAM and attach two new policies to this role:</p>
+<ol>
+<li>The first policy is related to s3. You&rsquo;ll see in the <code>buildspec.yml</code> file that we&rsquo;re executing the S3 sync command with the AWS CLI. Your bucket policy already has public read access, but you need to make a policy that gives access to delete objects from  that bucket. Here is what my json looks like:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;Version&#34;</span><span class="p">:</span> <span class="s2">&#34;2012-10-17&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;Statement&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&#34;arn:aws:s3:::trmccormick.com/*&#34;</span><span class="p">,</span>
+            <span class="p">],</span>
+            <span class="nt">&#34;Sid&#34;</span><span class="p">:</span> <span class="s2">&#34;s3_sync&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&#34;s3:DeleteObject&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;s3:GetBucketLocation&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;s3:GetObject&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;s3:ListBucket&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;s3:PutObject&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;s3:PutObjectAcl&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;s3:ListObjects&#34;</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>The second policy is related to Cloudfront. In the <code>buildspec.yml</code> file, we created a Cloudfront invaldation, so we&rsquo;ll need to give access to CodeBuild to be able to execute that. Change your resource to your Cloudfront distribution ARN and you should be all set. Here is the json for that policy:</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;Version&#34;</span><span class="p">:</span> <span class="s2">&#34;2012-10-17&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;Statement&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;Sid&#34;</span><span class="p">:</span> <span class="s2">&#34;cloudfront_invalidations&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s2">&#34;cloudfront:ListInvalidations&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;cloudfront:GetInvalidation&#34;</span><span class="p">,</span>
+                <span class="s2">&#34;cloudfront:CreateInvalidation&#34;</span>
+            <span class="p">],</span>
+            <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="s2">&#34;arn:aws:cloudfront::####:distribution/xxxxx&#34;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>That&rsquo;s it, now you should be able to push code to your GitHub repo and CodeBuild will run through the buildspec, and your site should reflect changes in just a matter of minutes. I&rsquo;ve been running my website since 2019 using this serverless strategy. Here is a picture of my monthly bill. I&rsquo;ll probably always stay near $0.51 per month.</p>
+<figure><img src="/aws_bill_jan2021.png" width="80%"/>
+</figure>
+
+<p>Thanks for reading!</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/aws/">AWS</a>
+                </span><span><a href="/tags/hugo/">Hugo</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod"></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://trmccormick.com/build_hugo_on_aws/" data-title="Build a Serverless Hugo Blog on AWS for $0.50 per month" data-hashtags="AWS,Hugo"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://trmccormick.com/build_hugo_on_aws/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://trmccormick.com/build_hugo_on_aws/"><i class="fab fa-reddit fa-fw"></i></a></span>
+        </div></div><div class="post-nav">
+            <a href="/aws_certified_cloud_practitioner/" class="next" rel="next" title="How to Study for the AWS Certified Cloud Practitioner Exam">Next Post<i class="fas fa-angle-right fa-fw"></i></a></div></div>
+</div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">
+        </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/about/">Trevor McCormick</a></span></div>
+</div>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a></div><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

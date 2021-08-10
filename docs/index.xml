@@ -1,10 +1,12 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>All Posts - trmccormick</title>
-        <link>https://trmccormick.com/posts/</link>
-        <description>All Posts | trmccormick</description>
+        <title>trmccormick</title>
+        <link>https://trmccormick.com/</link>
+        <description>trmccormick</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</managingEditor>
-            <webMaster>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</webMaster><lastBuildDate>Wed, 02 Jun 2021 11:20:22 -0400</lastBuildDate><atom:link href="https://trmccormick.com/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</webMaster><lastBuildDate>Thu, 08 Jul 2021 09:08:22 -0400</lastBuildDate>
+            <atom:link href="https://trmccormick.com/index.xml" rel="self" type="application/rss+xml" />
+        <item>
     <title>How to Study for the AWS Certified Solutions Architect Associate Exam</title>
     <link>https://trmccormick.com/aws_certified_solutions_architect_associate/</link>
     <pubDate>Wed, 02 Jun 2021 11:20:22 -0400</pubDate><author>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</author><guid>https://trmccormick.com/aws_certified_solutions_architect_associate/</guid>

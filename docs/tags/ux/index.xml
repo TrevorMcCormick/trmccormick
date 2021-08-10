@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>UX - Tag - trmccormick</title>
+        <link>https://trmccormick.com/tags/ux/</link>
+        <description>UX - Tag - trmccormick</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</managingEditor>
+            <webMaster>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</webMaster><lastBuildDate>Thu, 08 Jul 2021 09:08:22 -0400</lastBuildDate><atom:link href="https://trmccormick.com/tags/ux/" rel="self" type="application/rss+xml" /><item>
+    <title>Loading Fonts and Icons Asynchronously</title>
+    <link>https://trmccormick.com/drafts/asynchronous_assets/</link>
+    <pubDate>Thu, 08 Jul 2021 09:08:22 -0400</pubDate><author>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</author><guid>https://trmccormick.com/drafts/asynchronous_assets/</guid>
+    <description><![CDATA[The Difference Between Synchronous and Asynchronous Loading After you type in the URL to a website, some administrative magic happens behind the scenes. Here is a sketch of my entire website build, with the browser&rsquo;s request and download happening on the left side of the image:
+ When you load a website, you can use Chrome&rsquo;s DevTools to view how your browser is downloading, organizing, and delivering content from a website to your browser.]]></description>
+</item>
+</channel>
+</rss>

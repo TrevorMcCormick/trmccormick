@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>Loading Fonts and Icons Asynchronously - trmccormick</title><meta name="description" content=""><meta property="og:title" content="Loading Fonts and Icons Asynchronously" />
+<meta property="og:description" content="The Difference Between Synchronous and Asynchronous Loading After you type in the URL to a website, some administrative magic happens behind the scenes. Here is a sketch of my entire website build, with the browser&rsquo;s request and download happening on the left side of the image:
+ When you load a website, you can use Chrome&rsquo;s DevTools to view how your browser is downloading, organizing, and delivering content from a website to your browser." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://trmccormick.com/drafts/asynchronous_assets/" /><meta property="og:image" content="https://trmccormick.com/drafts/asynchronous_assets/main.png"/><meta property="article:section" content="drafts" />
+<meta property="article:published_time" content="2021-07-08T09:08:22-04:00" />
+<meta property="article:modified_time" content="2021-08-09T19:59:55-04:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://trmccormick.com/drafts/asynchronous_assets/main.png"/>
+<meta name="twitter:title" content="Loading Fonts and Icons Asynchronously"/>
+<meta name="twitter:description" content="The Difference Between Synchronous and Asynchronous Loading After you type in the URL to a website, some administrative magic happens behind the scenes. Here is a sketch of my entire website build, with the browser&rsquo;s request and download happening on the left side of the image:
+ When you load a website, you can use Chrome&rsquo;s DevTools to view how your browser is downloading, organizing, and delivering content from a website to your browser."/>
+<meta name="application-name" content="trmccormick">
+<meta name="apple-mobile-web-app-title" content="trmccormick"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="images/m_logo_transparent.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://trmccormick.com/drafts/asynchronous_assets/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Loading Fonts and Icons Asynchronously",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/trmccormick.com\/drafts\/asynchronous_assets\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/trmccormick.com\/drafts\/asynchronous_assets\/main.png",
+                            "width":  1500 ,
+                            "height":  600 
+                        }],"genre": "drafts","keywords": "UX","wordcount":  913 ,
+        "url": "https:\/\/trmccormick.com\/drafts\/asynchronous_assets\/","datePublished": "2021-07-08T09:08:22-04:00","dateModified": "2021-08-09T19:59:55-04:00","publisher": {
+            "@type": "Organization",
+            "name": "Trevor McCormick"},"author": {
+                "@type": "Person",
+                "name": "Trevor McCormick"
+            },"description": ""
+    }
+    </script></head><body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="trmccormick"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/m_logo_transparent.png"
+        data-srcset="/images/m_logo_transparent.png, /images/m_logo_transparent.png 1.5x, /images/m_logo_transparent.png 2x"
+        data-sizes="auto"
+        alt="/images/m_logo_transparent.png"
+        title="/images/m_logo_transparent.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> 👨🏻‍💻 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="trmccormick"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/m_logo_transparent.png"
+        data-srcset="/images/m_logo_transparent.png, /images/m_logo_transparent.png 1.5x, /images/m_logo_transparent.png 2x"
+        data-sizes="auto"
+        alt="/images/m_logo_transparent.png"
+        title="/images/m_logo_transparent.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">👨🏻‍💻</a><div class="menu-item"><a href="javascript:void(0);" class="theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto" style="top:8rem;">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single special" data-toc="enable"><h2 class="single-title animated fadeInDown faster">Loading Fonts and Icons Asynchronously</h2><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/drafts/asynchronous_assets/main.png"
+        data-srcset="/drafts/asynchronous_assets/main.png, /drafts/asynchronous_assets/main.png 1.5x, /drafts/asynchronous_assets/main.png 2x"
+        data-sizes="auto"
+        alt="/drafts/asynchronous_assets/main.png"
+        title="/drafts/asynchronous_assets/main.png" /></div><div class="single-card" data-image="true"><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>Contents</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-difference-between-synchronous-and-asynchronous-loading">The Difference Between Synchronous and Asynchronous Loading</a></li>
+    <li><a href="#how-to-host-fonts-locally-instead-of-through-a-cdn-or-an-api">How to host fonts locally instead of through a CDN or an API</a></li>
+    <li><a href="#what-speed-improvements-you-should-see">What speed improvements you should see</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><h2 id="the-difference-between-synchronous-and-asynchronous-loading">The Difference Between Synchronous and Asynchronous Loading</h2>
+<p>After you type in the URL to a website, some administrative magic happens behind the scenes. Here is a sketch of my entire website build, with the browser&rsquo;s request and download happening on the left side of the image:</p>
+<figure><img src="trmccormick.com.jpg"/>
+</figure>
+
+<p>When you load a website, you can use <a href="https://developer.chrome.com/docs/devtools/overview/" target="_blank" rel="noopener noreffer">Chrome&rsquo;s DevTools</a> to view how your browser is downloading, organizing, and delivering content from a website to your browser. Here is a quick snippet of the Network tab, with my cache disabled to show what a full request looks like:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/page/images/chrome_network_1.PNG#align-center"
+        data-srcset="/page/images/chrome_network_1.PNG#align-center, /page/images/chrome_network_1.PNG#align-center 1.5x, /page/images/chrome_network_1.PNG#align-center 2x"
+        data-sizes="auto"
+        alt="/page/images/chrome_network_1.PNG#align-center"
+        title="/page/images/chrome_network_1.PNG#align-center" /></p>
+<p>As you can see from the Waterfall on the right side of the image, the types of data are being downloaded in the following order: document, script, sytlesheet, font. The 200 status lets your browser know that the file has been downloaded successfully, and the Initiator column lets you know from where that file originated. There are some other helpful columns, such as size of the file, and how many milliseconds it takes for your browser to download and render that data.</p>
+<p>Once your browser starts a connection with the web server that hosts a website, it first tries to download the index.html file, which basically is a set of instructions telling it how to render the page you&rsquo;re asking for. In my site, for example, it has some Javascript files that are hosted in some folder on the webserver, and it has some CSS stylesheets that are hosted in another folder. Once you have downloaded everything from my webserver, then it fetches some other files that are hosted on other webservers. In this instance, the only thing that my site is asking you to load are font files, hosted in two different locations: fonts.googleapis.com, and font awesome&rsquo;s CDN. You can see that at this point, the fonts are not loading asynchronously; they start downloading after the files from my webserver are already downloaded.</p>
+<h2 id="how-to-host-fonts-locally-instead-of-through-a-cdn-or-an-api">How to host fonts locally instead of through a CDN or an API</h2>
+<p>In order to asynchronously load our fonts, let&rsquo;s work with Google fonts first. We need to go download the woff files from Google, then put it somewhere on our site locally. <a href="https://google-webfonts-helper.herokuapp.com/fonts/open-sans?subsets=latin" target="_blank" rel="noopener noreffer">Here is an amazing resource</a> that will help you generate the correct CSS code to host your fonts locally, and package up the right files for your webserver.</p>
+<p>If you&rsquo;re hosting a Hugo blog, here is the process I went through:</p>
+<ol>
+<li>Download the correct fonts from the above link. Package them up in a directory called <em>fonts</em>. I put mine in the <em>public/styles</em> directory.</li>
+<li>Create a new section in <em>public/dist/site.css</em> and add the CSS snippet from the above link.</li>
+<li>If you were to reload your site at this point in localhost, you would see the following change, indicating that the Google fonts are now being hosted locally, so they start loading earlier. However, the site still has some code that is telling the browser to also go download the fonts from the Google fonts server.
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/page/images/chrome_network_2.PNG#align-center"
+        data-srcset="/page/images/chrome_network_2.PNG#align-center, /page/images/chrome_network_2.PNG#align-center 1.5x, /page/images/chrome_network_2.PNG#align-center 2x"
+        data-sizes="auto"
+        alt="/page/images/chrome_network_2.PNG#align-center"
+        title="/page/images/chrome_network_2.PNG#align-center" /></li>
+<li>To take out the last call to Google Fonts, you need to delete the <link> reference to the Google fonts in your <em>footer.html</em> file. Once you do that, you&rsquo;ll see those calls go away, and your page speed increase:
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/page/images/chrome_network_3.PNG#align-center"
+        data-srcset="/page/images/chrome_network_3.PNG#align-center, /page/images/chrome_network_3.PNG#align-center 1.5x, /page/images/chrome_network_3.PNG#align-center 2x"
+        data-sizes="auto"
+        alt="/page/images/chrome_network_3.PNG#align-center"
+        title="/page/images/chrome_network_3.PNG#align-center" /></li>
+</ol>
+<p>So in completing these four steps, we&rsquo;ve done two things: we&rsquo;ve minimized the user&rsquo;s browser&rsquo;s workload, and we&rsquo;ve improved the user experience by delivering content to their screen faster (in these screenshots, it looks like it improved it by quite a bit, but we&rsquo;ll check with <a href="https://developers.google.com/speed/pagespeed/insights/" target="_blank" rel="noopener noreffer">Google Page Insights</a> to make sure.)</p>
+<p>The last thing we are going to do is just repeat the process for the font-awesome fonts. They have a <a href="https://fontawesome.com/v5.15/how-to-use/on-the-web/setup/hosting-font-awesome-yourself" target="_blank" rel="noopener noreffer">great tutorial</a> on how to host their icons locally.</p>
+<p>This was kind of a pain, taking about an hour to sort things out. But here is a quick overview of what I did different for font-awesome:</p>
+<ol>
+<li>
+<p>In my <em>config.yaml</em> file, I added a section under params, so it looks like:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="nt">params</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="nt">custom_css</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;font-awesome/font-awesome.css&#34;</span><span class="p">]</span><span class="w">
+</span><span class="w">    </span><span class="nt">custom_js</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;font-awesome/font-awesome.js&#34;</span><span class="p">]</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>In my static folder, I added a new folder called <em>font-awesome</em>, and I placed 3 things in it from the above font-awesome link:</p>
+<ol>
+<li><em>all.css</em> (renamed to <em>font-awesome.css</em>)
+Within this file, I edited the links to the actual SVG files so that they would match where I put them in the static directory</li>
+<li><em>brands.js</em> (renamed to <em>font-awesome.js</em>)
+I think at this time I only use font-awesome for the brands that are free. At some point I&rsquo;d like to pay for the Pro version, but $99/year is too steep for icon hoarding 🙂</li>
+<li>the webfonts directory (this contains all of the SVG paths that draw the icons)</li>
+</ol>
+</li>
+<li>
+<p>In the <em>extra-in-head.html</em> partial, I added the following code, which lets Hugo know how to use the new site parameters I just declared.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">{{ range .Site.Params.custom_css -}}
+<span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&#34;stylesheet&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ . | absURL }}&#34;</span><span class="p">&gt;</span>
+{{- end }}
+
+{{ range .Site.Params.custom_js -}}
+    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">defer</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;{{ . | absURL }}&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+{{- end }}
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>Finally, I had to take a look at the <em>font-awesome.css</em> file and figure out that the CSS class for my brand icons was <strong>fab</strong> instead of <strong>fa</strong>, so I had to go into my <em>header.html</em> file to edit the classes.</p>
+</li>
+</ol>
+<h2 id="what-speed-improvements-you-should-see">What speed improvements you should see</h2>
+<p>Now, my site loads much faster for users because it is not wasting time going to other webservers. Here is the final screenshot of my Chrome network tab when I load it locally:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/page/images/chrome_network_4.PNG#align-center"
+        data-srcset="/page/images/chrome_network_4.PNG#align-center, /page/images/chrome_network_4.PNG#align-center 1.5x, /page/images/chrome_network_4.PNG#align-center 2x"
+        data-sizes="auto"
+        alt="/page/images/chrome_network_4.PNG#align-center"
+        title="/page/images/chrome_network_4.PNG#align-center" /></p>
+<p>And here is the result in Google Page Speed Insights:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/page/images/page_speed_async_fonts_solution.png#align-center"
+        data-srcset="/page/images/page_speed_async_fonts_solution.png#align-center, /page/images/page_speed_async_fonts_solution.png#align-center 1.5x, /page/images/page_speed_async_fonts_solution.png#align-center 2x"
+        data-sizes="auto"
+        alt="/page/images/page_speed_async_fonts_solution.png#align-center"
+        title="/page/images/page_speed_async_fonts_solution.png#align-center" /></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/ux/">UX</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod"></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://trmccormick.com/drafts/asynchronous_assets/" data-title="Loading Fonts and Icons Asynchronously" data-hashtags="UX"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://trmccormick.com/drafts/asynchronous_assets/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://trmccormick.com/drafts/asynchronous_assets/"><i class="fab fa-reddit fa-fw"></i></a></span>
+        </div></div><div class="post-nav"></div></div>
+</div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">
+        </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/about/">Trevor McCormick</a></span></div>
+</div>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a></div><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

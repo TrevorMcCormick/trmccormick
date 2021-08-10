@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <title>How to Study for the AWS Certified Solutions Architect Associate Exam - trmccormick</title><meta name="description" content=""><meta property="og:title" content="How to Study for the AWS Certified Solutions Architect Associate Exam" />
+<meta property="og:description" content="Background There is no better preparation than hands-on experience with AWS. Before I attempted this certification exam, I had about two years of experience working across AWS, primarily using services to build my website and handle data ingestion and warehousing processes at work. I had drawn out some simple architecture documents up to this point, and I could generally describe what was happening. However, I knew that in order to pass the exam, I would need to strengthen my understanding of services I was already familiar with (S3, RDS, IAM), and spend a significant amount of time learning the ones I did not use day to day (VPC, Route53, Networking, etc)." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://trmccormick.com/aws_certified_solutions_architect_associate/" /><meta property="og:image" content="https://trmccormick.com/aws_certified_solutions_architect_associate/main.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-06-02T11:20:22-04:00" />
+<meta property="article:modified_time" content="2021-08-09T19:59:55-04:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://trmccormick.com/aws_certified_solutions_architect_associate/main.png"/>
+<meta name="twitter:title" content="How to Study for the AWS Certified Solutions Architect Associate Exam"/>
+<meta name="twitter:description" content="Background There is no better preparation than hands-on experience with AWS. Before I attempted this certification exam, I had about two years of experience working across AWS, primarily using services to build my website and handle data ingestion and warehousing processes at work. I had drawn out some simple architecture documents up to this point, and I could generally describe what was happening. However, I knew that in order to pass the exam, I would need to strengthen my understanding of services I was already familiar with (S3, RDS, IAM), and spend a significant amount of time learning the ones I did not use day to day (VPC, Route53, Networking, etc)."/>
+<meta name="application-name" content="trmccormick">
+<meta name="apple-mobile-web-app-title" content="trmccormick"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="images/m_logo_transparent.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://trmccormick.com/aws_certified_solutions_architect_associate/" /><link rel="prev" href="https://trmccormick.com/aws_rds_postgres_python/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "How to Study for the AWS Certified Solutions Architect Associate Exam",
+        "inLanguage": "en",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/trmccormick.com\/aws_certified_solutions_architect_associate\/"
+        },"image": [{
+                            "@type": "ImageObject",
+                            "url": "https:\/\/trmccormick.com\/aws_certified_solutions_architect_associate\/main.png",
+                            "width":  1500 ,
+                            "height":  600 
+                        }],"genre": "posts","keywords": "AWS","wordcount":  500 ,
+        "url": "https:\/\/trmccormick.com\/aws_certified_solutions_architect_associate\/","datePublished": "2021-06-02T11:20:22-04:00","dateModified": "2021-08-09T19:59:55-04:00","publisher": {
+            "@type": "Organization",
+            "name": "Trevor McCormick"},"author": {
+                "@type": "Person",
+                "name": "Trevor McCormick"
+            },"description": ""
+    }
+    </script></head><body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="trmccormick"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/m_logo_transparent.png"
+        data-srcset="/images/m_logo_transparent.png, /images/m_logo_transparent.png 1.5x, /images/m_logo_transparent.png 2x"
+        data-sizes="auto"
+        alt="/images/m_logo_transparent.png"
+        title="/images/m_logo_transparent.png" /></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> Posts </a><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/about/"> 👨🏻‍💻 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="trmccormick"><img
+        class="lazyload logo"
+        src="/svg/loading.min.svg"
+        data-src="/images/m_logo_transparent.png"
+        data-srcset="/images/m_logo_transparent.png, /images/m_logo_transparent.png 1.5x, /images/m_logo_transparent.png 2x"
+        data-sizes="auto"
+        alt="/images/m_logo_transparent.png"
+        title="/images/m_logo_transparent.png" /></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">Posts</a><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/about/" title="">👨🏻‍💻</a><div class="menu-item"><a href="javascript:void(0);" class="theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div></div>
+    </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div><main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single" data-toc="enable"><div class="featured-image"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="/aws_certified_solutions_architect_associate/main.png"
+        data-srcset="/aws_certified_solutions_architect_associate/main.png, /aws_certified_solutions_architect_associate/main.png 1.5x, /aws_certified_solutions_architect_associate/main.png 2x"
+        data-sizes="auto"
+        alt="/aws_certified_solutions_architect_associate/main.png"
+        title="/aws_certified_solutions_architect_associate/main.png" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">How to Study for the AWS Certified Solutions Architect Associate Exam</h2><div class="post-meta">
+                <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-06-02">2021-06-02</time></span>&nbsp;&nbsp;<span class="post-category">published in <a href="/categories/certifications/"><i class="far fa-folder fa-fw"></i>Certifications</a></span></div>
+            </div>
+            
+            <hr><div class="details toc" id="toc-static"  data-kept="">
+                    <div class="details-summary toc-title">
+                        <span>Contents</span>
+                        <span><i class="details-icon fas fa-angle-right"></i></span>
+                    </div>
+                    <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#background">Background</a></li>
+    <li><a href="#a-cloud-guru">A Cloud Guru</a></li>
+    <li><a href="#other-resources">Other Resources</a></li>
+    <li><a href="#ta-da">Ta-da</a></li>
+  </ul>
+</nav></div>
+                </div><div class="content" id="content"><h2 id="background">Background</h2>
+<p>There is no better preparation than hands-on experience with AWS. Before I attempted this certification exam, I had about two years of experience working across AWS, primarily using services to build my website and handle data ingestion and warehousing processes at work. I had drawn out some simple architecture documents up to this point, and I could generally describe what was happening. However, I knew that in order to pass the exam, I would need to strengthen my understanding of services I was already familiar with (S3, RDS, IAM), and spend a significant amount of time learning the ones I did not use day to day (VPC, Route53, Networking, etc).</p>
+<p>Here is a link to <a href="https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Exam-Guide.pdf" target="_blank" rel="noopener noreffer">the exam guide</a> which identifies the four content domains you must know in order to pass: resiliency, high-performance, security, and cost-optimization. When you study for this exam, if you&rsquo;re reading about a specific service, or building something out in the console, try to understand the service offering with these four concepts in mind. Some key questions to ask yourself might be: what happens if this service fails? how can I scale my application to meet demand? how can I lockdown the components of my VPC so that it is protected from internal and external threats? is this the most cost-effective way to achieve my goals?</p>
+<h2 id="a-cloud-guru">A Cloud Guru</h2>
+<p>I felt like the first best step for me would be to get through all of the videos and exercises in <a href="https://acloud.guru/overview/aws-certified-solutions-architect-associate" target="_blank" rel="noopener noreffer">A Cloud Guru&rsquo;s - AWS Certified Solutions Architect Associate SAA-C02 course</a>. There was 45 hours of content in this course alone, so it was definitely a big first step.</p>
+<p>As I was going through this course, I browsed through some of the other offerings, and found the [AWS Well-Architected Framework course]](<a href="https://acloud.guru/overview/aws-well-architected-framework" target="_blank" rel="noopener noreffer">https://acloud.guru/overview/aws-well-architected-framework</a>) fairly helpful.</p>
+<p>What I found MOST helpful was the hands-on labs. Here is a curated list of labs I found most helpful:</p>
+<ul>
+<li><a href="https://learn.acloud.guru/handson/feb3bc2b-c912-4f5c-94d7-bfbedea6319f" target="_blank" rel="noopener noreffer">ALBs and Auto-Scaling</a></li>
+<li><a href="https://learn.acloud.guru/handson/a95ff0ea-4d92-4c80-ad92-35f42389b4a4" target="_blank" rel="noopener noreffer">AMIs</a></li>
+<li><a href="https://learn.acloud.guru/handson/82ac8bc4-ccd3-4f28-8a96-124923392764" target="_blank" rel="noopener noreffer">Bastion Hosts</a></li>
+<li><a href="https://learn.acloud.guru/handson/761e1ac8-8825-4772-af95-4ba878883e9d" target="_blank" rel="noopener noreffer">Database Migration</a></li>
+<li><a href="https://learn.acloud.guru/handson/f234c76a-c804-4d89-81ca-524514cdc59d" target="_blank" rel="noopener noreffer">EBS Volumes</a></li>
+<li><a href="https://learn.acloud.guru/handson/aacf9e92-0bb7-4969-aaf7-e2e106a7e339" target="_blank" rel="noopener noreffer">RDS</a></li>
+<li><a href="https://learn.acloud.guru/handson/0861366a-855b-4ff0-a6f6-ac93e2738dbd" target="_blank" rel="noopener noreffer">SQS</a></li>
+<li><a href="https://learn.acloud.guru/search?page=1&amp;learningTypes%5B0%5D=ACG_HANDS_ON_LAB&amp;labModes%5B0%5D=GUIDED&amp;technologies%5B0%5D=VPC&amp;cloudProviders%5B0%5D=AWS" target="_blank" rel="noopener noreffer">VPCs</a></li>
+</ul>
+<h2 id="other-resources">Other Resources</h2>
+<p>After taking the two ACG courses and moving through these labs, I used the following resources to prepare for the ACG practice exams:</p>
+<ul>
+<li><a href="https://tutorialsdojo.com/aws-cheat-sheets/" target="_blank" rel="noopener noreffer">AWS Cheat Sheets by Tutorials Dojo</a></li>
+<li><a href="https://aws.amazon.com/faqs/" target="_blank" rel="noopener noreffer">AWS FAQs</a></li>
+<li><a href="https://aws.amazon.com/getting-started/hands-on/?nc2=h_ql_le_gs_t&amp;getting-started-all.sort-by=item.additionalFields.sortOrder&amp;getting-started-all.sort-order=asc&amp;awsf.getting-started-category=*all&amp;awsf.getting-started-level=level%23200&amp;awsf.getting-started-content-type=*all" target="_blank" rel="noopener noreffer">AWS 200-level Hands-On Tutorials</a></li>
+<li><a href="https://aws.amazon.com/whitepapers/?e=gs&amp;p=gsrc&amp;whitepapers-main.sort-by=item.additionalFields.sortDate&amp;whitepapers-main.sort-order=desc&amp;awsf.whitepapers-content-type=content-type%23reference-arch-diagram&amp;awsf.whitepapers-tech-category=*all&amp;awsf.whitepapers-industries=*all&amp;awsf.whitepapers-business-category=*all&amp;awsf.whitepapers-global-methodology=*all" target="_blank" rel="noopener noreffer">AWS Reference Architecture Diagrams</a></li>
+</ul>
+<p>After all of this preparation, my wife basically told me I needed to stop studying and just take the exam 😅 So that&rsquo;s what I did!</p>
+<h2 id="ta-da">Ta-da</h2>
+<p>I passed the test without much trouble, flagging only a few questions for review. My advice after seeing the questions on the test is that AWS truly provides the best resources, but the labs from A Cloud Guru are vital. You really have to build a VPC from scratch in your head to answer the long-form questions on the exam. Although I do not think I&rsquo;m cut out for the Solutions Architect Professional exam, I do want to continue the learning path I&rsquo;m on through ACG, and potentially take the Data and Analytics specialty exam in the next couple of years.</p>
+<figure><img src="/aws_cssa.jpg" width="80%"/>
+</figure>
+
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info"><div class="post-info-tag"><span><a href="/tags/aws/">AWS</a>
+                </span></div><div class="post-info-line"><div class="post-info-mod"></div>
+        </div><div class="post-info-share">
+            <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://trmccormick.com/aws_certified_solutions_architect_associate/" data-title="How to Study for the AWS Certified Solutions Architect Associate Exam" data-hashtags="AWS"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Linkedin" data-sharer="linkedin" data-url="https://trmccormick.com/aws_certified_solutions_architect_associate/"><i class="fab fa-linkedin fa-fw"></i></a><a href="javascript:void(0);" title="Share on Reddit" data-sharer="reddit" data-url="https://trmccormick.com/aws_certified_solutions_architect_associate/"><i class="fab fa-reddit fa-fw"></i></a></span>
+        </div></div><div class="post-nav"><a href="/aws_rds_postgres_python/" class="prev" rel="prev" title="How To Query PostgreSQL in AWS RDS with Python"><i class="fas fa-angle-left fa-fw"></i>Previous Post</a></div></div>
+</div></article></div>
+            </main>
+            <footer class="footer"><div class="footer-container"><div class="footer-line">
+        </div><div class="footer-line" itemscope itemtype="http://schema.org/CreativeWork"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/about/">Trevor McCormick</a></span></div>
+</div>
+</footer>
+        </div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-chevron-up fa-fw"></i>
+            </a></div><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.38.0/dist/autocomplete.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lunr@2.3.9/lunr.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script><script src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.1/sharer.min.js"></script><script>window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js"></script></body></html>

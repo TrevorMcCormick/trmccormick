@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Data - Category - trmccormick</title>
+        <link>https://trmccormick.com/categories/data/</link>
+        <description>Data - Category - trmccormick</description>
+        <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</managingEditor>
+            <webMaster>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</webMaster><lastBuildDate>Thu, 04 Feb 2021 11:20:22 -0400</lastBuildDate><atom:link href="https://trmccormick.com/categories/data/" rel="self" type="application/rss+xml" /><item>
+    <title>How To Query PostgreSQL in AWS RDS with Python</title>
+    <link>https://trmccormick.com/aws_rds_postgres_python/</link>
+    <pubDate>Thu, 04 Feb 2021 11:20:22 -0400</pubDate><author>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</author><guid>https://trmccormick.com/aws_rds_postgres_python/</guid>
+    <description><![CDATA[In this post I&rsquo;ll walk through:
+ how to create a public PostgreSQL instance in RDS using free-tier how to create a table and load it with data from a csv file how to query data from that table using psycopg2  PostgreSQL on RDS The only thing you have to do in the AWS console is create a Postgres DB instance and make sure it is open to the public (just for this example).]]></description>
+</item>
+</channel>
+</rss>
