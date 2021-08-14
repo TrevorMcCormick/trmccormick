@@ -450,7 +450,7 @@ copyright = ""
     # character used for the cursor (HTML format is supported)
     cursorChar = "|"
     # cursor duration after typing finishing (measured in milliseconds, "-1" means unlimited)
-    duration = -1
+    duration = 3000
 
   # Site verification code for Google/Bing/Yandex/Pinterest/Baidu
   [params.verification]
