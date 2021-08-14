@@ -18,29 +18,7 @@
 <meta name="twitter:description" content="In this post I&rsquo;ll walk through:
  how to create a public PostgreSQL instance in RDS using free-tier how to create a table and load it with data from a csv file how to query data from that table using psycopg2  PostgreSQL on RDS The only thing you have to do in the AWS console is create a Postgres DB instance and make sure it is open to the public (just for this example)."/>
 <meta name="application-name" content="trmccormick">
-<meta name="apple-mobile-web-app-title" content="trmccormick"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="images/m_logo_transparent.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://trmccormick.com/aws_rds_postgres_python/" /><link rel="prev" href="https://trmccormick.com/aws_certified_cloud_practitioner/" /><link rel="next" href="https://trmccormick.com/aws_certified_solutions_architect_associate/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css"><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "How To Query PostgreSQL in AWS RDS with Python",
-        "inLanguage": "en",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "https:\/\/trmccormick.com\/aws_rds_postgres_python\/"
-        },"image": [{
-                            "@type": "ImageObject",
-                            "url": "https:\/\/trmccormick.com\/aws_rds_postgres_python\/aws_rds_postgres_python.webp",
-                            "width":  1500 ,
-                            "height":  600 
-                        }],"genre": "posts","keywords": "Python, AWS","wordcount":  528 ,
-        "url": "https:\/\/trmccormick.com\/aws_rds_postgres_python\/","datePublished": "2021-02-04T11:20:22-04:00","dateModified": "2021-08-14T00:03:18-04:00","publisher": {
-            "@type": "Organization",
-            "name": "Trevor McCormick"},"author": {
-                "@type": "Person",
-                "name": "Trevor McCormick"
-            },"description": ""
-    }
-    </script></head><body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+<meta name="apple-mobile-web-app-title" content="trmccormick"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="images/m_logo_transparent.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://trmccormick.com/aws_rds_postgres_python/" /><link rel="prev" href="https://trmccormick.com/aws_certified_cloud_practitioner/" /><link rel="next" href="https://trmccormick.com/aws_certified_solutions_architect_associate/" /><link rel="stylesheet" href="/css/page.min.css"><link rel="stylesheet" href="/css/home.min.css"></head><body data-header-desktop="fixed" data-header-mobile="auto"><script>(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
         <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
     <div class="header-wrapper">
