@@ -5,7 +5,7 @@ draft: false
 tags: [Python, AWS]
 resources:
 - name: "featured-image"
-  src: "main.png"
+  src: "aws_rds_postgres_python.webp"
 categories: ["Data"]
 ---
 
