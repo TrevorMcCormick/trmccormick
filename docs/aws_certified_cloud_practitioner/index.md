@@ -52,3 +52,4 @@ I'm interested in the [Anki Flashcard System](https://apps.ankiweb.net/), so I m
 When you pass, you get a shiny certificate, and access to a secret AWS store where you can buy swag such as a small notebook with AWS written on it for $5 :wink:
 
 {{< figure src="/aws_ccp.webp" width="80%" >}}
+
