@@ -11,7 +11,7 @@ Below is an AWS architecture diagram I created using [diagrams.net](diagrams.net
 5. **GitHub** -- hosting your code
 6. **CodeBuild** -- building your Hugo site (CI/CD)
 
-{{< figure src="/trmccormick.com.jpg" width="80%" >}}
+{{< figure src="trmccormick.com.webp" width="80%" >}}
  
 ## Route53
 I pay $0.50 per month for one hosted zone on [Route53](https://aws.amazon.com/route53/). AWS actually created this hosted zone for me when I purchased my domain through Route53. 
@@ -150,7 +150,7 @@ Okay back to the service role. CodeBuild needs to work with s3 and Cloudfront, s
 
 That's it, now you should be able to push code to your GitHub repo and CodeBuild will run through the buildspec, and your site should reflect changes in just a matter of minutes. I've been running my website since 2019 using this serverless strategy. Here is a picture of my monthly bill. I'll probably always stay near $0.51 per month.
 
-{{< figure src="/aws_bill_jan2021.png" width="80%" >}}
+{{< figure src="/aws_bill_jan2021.webp" width="80%" >}}
 
 Thanks for reading!
 

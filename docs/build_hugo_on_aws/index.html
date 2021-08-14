@@ -8,12 +8,12 @@
 <meta property="og:description" content="This post assumes you already have some familiarity with Hugo for building a blog, and you have set up a free-tier AWS account. You don&rsquo;t have to be an expert at either Hugo or AWS to follow along with the guide below. Really the only requirement is that you&rsquo;re able to follow the Hugo quick start guide.
 Below is an AWS architecture diagram I created using diagrams.net, the free version of draw." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://trmccormick.com/build_hugo_on_aws/" /><meta property="og:image" content="https://trmccormick.com/build_hugo_on_aws/main.png"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://trmccormick.com/build_hugo_on_aws/" /><meta property="og:image" content="https://trmccormick.com/build_hugo_on_aws/build_hugo_on_aws.webp"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-08-02T11:20:22-04:00" />
-<meta property="article:modified_time" content="2021-08-09T19:59:55-04:00" />
+<meta property="article:modified_time" content="2021-08-14T00:03:18-04:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://trmccormick.com/build_hugo_on_aws/main.png"/>
+<meta name="twitter:image" content="https://trmccormick.com/build_hugo_on_aws/build_hugo_on_aws.webp"/>
 <meta name="twitter:title" content="Build a Serverless Hugo Blog on AWS for $0.50 per month"/>
 <meta name="twitter:description" content="This post assumes you already have some familiarity with Hugo for building a blog, and you have set up a free-tier AWS account. You don&rsquo;t have to be an expert at either Hugo or AWS to follow along with the guide below. Really the only requirement is that you&rsquo;re able to follow the Hugo quick start guide.
 Below is an AWS architecture diagram I created using diagrams.net, the free version of draw."/>
@@ -29,11 +29,11 @@ Below is an AWS architecture diagram I created using diagrams.net, the free vers
             "@id": "https:\/\/trmccormick.com\/build_hugo_on_aws\/"
         },"image": [{
                             "@type": "ImageObject",
-                            "url": "https:\/\/trmccormick.com\/build_hugo_on_aws\/main.png",
+                            "url": "https:\/\/trmccormick.com\/build_hugo_on_aws\/build_hugo_on_aws.webp",
                             "width":  1500 ,
                             "height":  600 
                         }],"genre": "posts","keywords": "AWS, Hugo","wordcount":  1458 ,
-        "url": "https:\/\/trmccormick.com\/build_hugo_on_aws\/","datePublished": "2020-08-02T11:20:22-04:00","dateModified": "2021-08-09T19:59:55-04:00","publisher": {
+        "url": "https:\/\/trmccormick.com\/build_hugo_on_aws\/","datePublished": "2020-08-02T11:20:22-04:00","dateModified": "2021-08-14T00:03:18-04:00","publisher": {
             "@type": "Organization",
             "name": "Trevor McCormick"},"author": {
                 "@type": "Person",
@@ -122,11 +122,11 @@ Below is an AWS architecture diagram I created using diagrams.net, the free vers
         </div><article class="page single" data-toc="enable"><div class="featured-image"><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="/build_hugo_on_aws/main.png"
-        data-srcset="/build_hugo_on_aws/main.png, /build_hugo_on_aws/main.png 1.5x, /build_hugo_on_aws/main.png 2x"
+        data-src="/build_hugo_on_aws/build_hugo_on_aws.webp"
+        data-srcset="/build_hugo_on_aws/build_hugo_on_aws.webp, /build_hugo_on_aws/build_hugo_on_aws.webp 1.5x, /build_hugo_on_aws/build_hugo_on_aws.webp 2x"
         data-sizes="auto"
-        alt="/build_hugo_on_aws/main.png"
-        title="/build_hugo_on_aws/main.png" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Build a Serverless Hugo Blog on AWS for $0.50 per month</h2><div class="post-meta">
+        alt="/build_hugo_on_aws/build_hugo_on_aws.webp"
+        title="/build_hugo_on_aws/build_hugo_on_aws.webp" /></div><div class="single-card" data-image="true"><h2 class="single-title animated flipInX">Build a Serverless Hugo Blog on AWS for $0.50 per month</h2><div class="post-meta">
                 <div class="post-meta-line"><span><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-08-02">2020-08-02</time></span>&nbsp;</div>
             </div>
             
@@ -155,7 +155,7 @@ Below is an AWS architecture diagram I created using diagrams.net, the free vers
 <li><strong>GitHub</strong> &ndash; hosting your code</li>
 <li><strong>CodeBuild</strong> &ndash; building your Hugo site (CI/CD)</li>
 </ol>
-<figure><img src="/trmccormick.com.jpg" width="80%"/>
+<figure><img src="trmccormick.com.webp" width="80%"/>
 </figure>
 
 <h2 id="route53">Route53</h2>
@@ -387,7 +387,7 @@ Below is an AWS architecture diagram I created using diagrams.net, the free vers
 </code></pre></td></tr></table>
 </div>
 </div><p>That&rsquo;s it, now you should be able to push code to your GitHub repo and CodeBuild will run through the buildspec, and your site should reflect changes in just a matter of minutes. I&rsquo;ve been running my website since 2019 using this serverless strategy. Here is a picture of my monthly bill. I&rsquo;ll probably always stay near $0.51 per month.</p>
-<figure><img src="/aws_bill_jan2021.png" width="80%"/>
+<figure><img src="/aws_bill_jan2021.webp" width="80%"/>
 </figure>
 
 <p>Thanks for reading!</p>

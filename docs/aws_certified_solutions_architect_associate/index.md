@@ -39,4 +39,4 @@ After all of this preparation, my wife basically told me I needed to stop studyi
 
 I passed the test without much trouble, flagging only a few questions for review. My advice after seeing the questions on the test is that AWS truly provides the best resources, but the labs from A Cloud Guru are vital. You really have to build a VPC from scratch in your head to answer the long-form questions on the exam. Although I do not think I'm cut out for the Solutions Architect Professional exam, I do want to continue the learning path I'm on through ACG, and potentially take the Data and Analytics specialty exam in the next couple of years.
 
-{{< figure src="/aws_cssa.jpg" width="80%" >}}
+{{< figure src="/aws_cssa.webp" width="80%" >}}
