@@ -5,10 +5,11 @@
         <description>AWS - Tag - trmccormick</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</managingEditor>
             <webMaster>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</webMaster><lastBuildDate>Wed, 02 Jun 2021 11:20:22 -0400</lastBuildDate><atom:link href="https://trmccormick.com/tags/aws/" rel="self" type="application/rss+xml" /><item>
-    <title>How to Study for the AWS Certified Solutions Architect Associate Exam</title>
+    <title>Preparing for the AWS Certified Solutions Architect Associate Exam</title>
     <link>https://trmccormick.com/aws_certified_solutions_architect_associate/</link>
     <pubDate>Wed, 02 Jun 2021 11:20:22 -0400</pubDate><author>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</author><guid>https://trmccormick.com/aws_certified_solutions_architect_associate/</guid>
-    <description><![CDATA[Background There is no better preparation than hands-on experience with AWS. Before I attempted this certification exam, I had about two years of experience working across AWS, primarily using services to build my website and handle data ingestion and warehousing processes at work. I had drawn out some simple architecture documents up to this point, and I could generally describe what was happening. However, I knew that in order to pass the exam, I would need to strengthen my understanding of services I was already familiar with (S3, RDS, IAM), and spend a significant amount of time learning the ones I did not use day to day (VPC, Route53, Networking, etc).]]></description>
+    <description><![CDATA[The AWS Certified Solutions Architect Associate Exam tests your ability to translate specific client needs into basic cloud architectural designs. While the AWS Cerified Cloud Practitioner Exam covers the core concepts of AWS at a broad level, the Solutions Architect Associate Exam goes a level deeper in all areas. You should have hands-on experience designing end-to-end solutions, deploying VPCs that support various networking, compute, storage, and database strategies.
+Background There is no better preparation than hands-on experience with AWS.]]></description>
 </item>
 <item>
     <title>How To Query PostgreSQL in AWS RDS with Python</title>
@@ -18,11 +19,11 @@
  how to create a public PostgreSQL instance in RDS using free-tier how to create a table and load it with data from a csv file how to query data from that table using psycopg2  PostgreSQL on RDS The only thing you have to do in the AWS console is create a Postgres DB instance and make sure it is open to the public (just for this example).]]></description>
 </item>
 <item>
-    <title>How to Study for the AWS Certified Cloud Practitioner Exam</title>
+    <title>Preparing for the AWS Certified Cloud Practitioner Exam</title>
     <link>https://trmccormick.com/aws_certified_cloud_practitioner/</link>
     <pubDate>Sun, 04 Oct 2020 19:08:22 -0400</pubDate><author>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</author><guid>https://trmccormick.com/aws_certified_cloud_practitioner/</guid>
-    <description><![CDATA[Cloud Foundations The AWS Certified Cloud Practitioner Exam assumes you have some familiarity with cloud concepts. If you&rsquo;re completely unfamiliar with those, it may benefit you to learn or review some introductory computing concepts. When I was in college, I completed two courses that gave me a great foundation:
- Stanford CS 101 - Introduction to Computing Principles Harvard CS50 - Introduction to Computer Science  This course features one of my favorite professors of all time &ndash; David Malan.]]></description>
+    <description><![CDATA[The AWS Certified Cloud Practitioner Exam challenges your knowledge of introductory cloud concepts. The exam does not cover any programming, any system admin types of tasks, or any advanced solution architecture designs. Rather, it tests your understanding of the mechanics, the scope, and the benefits of cloud computing, as well as the AWS philosophy in general.
+Computing Foundations I recommend browsing through these two courses to evaluate your knowledge of how computers work, from doing basic tasks to coordinating and executing complex operations with other machines.]]></description>
 </item>
 <item>
     <title>Build a Serverless Hugo Blog on AWS for $0.50 per month</title>

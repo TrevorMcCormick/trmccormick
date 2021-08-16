@@ -1,9 +1,11 @@
-# How to Study for the AWS Certified Solutions Architect Associate Exam
+# Preparing for the AWS Certified Solutions Architect Associate Exam
 
+
+The AWS Certified Solutions Architect Associate Exam tests your ability to translate specific client needs into basic cloud architectural designs. While the AWS Cerified Cloud Practitioner Exam covers the core concepts of AWS at a broad level, the Solutions Architect Associate Exam goes a level deeper in all areas. You should have hands-on experience designing end-to-end solutions, deploying VPCs that support various networking, compute, storage, and database strategies.
 
 ## Background
 
-There is no better preparation than hands-on experience with AWS. Before I attempted this certification exam, I had about two years of experience working across AWS, primarily using services to build my website and handle data ingestion and warehousing processes at work. I had drawn out some simple architecture documents up to this point, and I could generally describe what was happening. However, I knew that in order to pass the exam, I would need to strengthen my understanding of services I was already familiar with (S3, RDS, IAM), and spend a significant amount of time learning the ones I did not use day to day (VPC, Route53, Networking, etc). 
+There is no better preparation than hands-on experience with AWS. Before I attempted this certification exam, I had about three years of experience working across AWS, primarily using services to build my website and handle data ingestion and warehousing processes at work. I had drawn out some simple architecture documents up to this point, and I could generally describe what was happening. However, I knew that in order to pass the exam, I would need to strengthen my understanding of services I was already familiar with (S3, RDS, IAM), and spend a significant amount of time learning the ones I did not use day to day (VPC, Route53, Networking, etc). 
 
 Here is a link to [the exam guide](https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Exam-Guide.pdf) which identifies the four content domains you must know in order to pass: resiliency, high-performance, security, and cost-optimization. When you study for this exam, if you're reading about a specific service, or building something out in the console, try to understand the service offering with these four concepts in mind. Some key questions to ask yourself might be: what happens if this service fails? how can I scale my application to meet demand? how can I lockdown the components of my VPC so that it is protected from internal and external threats? is this the most cost-effective way to achieve my goals?
 
@@ -25,7 +27,7 @@ What I found MOST helpful was the hands-on labs. Here is a curated list of labs 
 * [VPCs](https://learn.acloud.guru/search?page=1&learningTypes%5B0%5D=ACG_HANDS_ON_LAB&labModes%5B0%5D=GUIDED&technologies%5B0%5D=VPC&cloudProviders%5B0%5D=AWS)
 
 
-## Other Resources
+## FAQs, Cheat Sheets, and Tutorials
 
 After taking the two ACG courses and moving through these labs, I used the following resources to prepare for the ACG practice exams:
 * [AWS Cheat Sheets by Tutorials Dojo](https://tutorialsdojo.com/aws-cheat-sheets/)
@@ -35,8 +37,10 @@ After taking the two ACG courses and moving through these labs, I used the follo
 
 After all of this preparation, my wife basically told me I needed to stop studying and just take the exam 😅 So that's what I did!
 
-## Ta-da
+## Celebrate
 
-I passed the test without much trouble, flagging only a few questions for review. My advice after seeing the questions on the test is that AWS truly provides the best resources, but the labs from A Cloud Guru are vital. You really have to build a VPC from scratch in your head to answer the long-form questions on the exam. Although I do not think I'm cut out for the Solutions Architect Professional exam, I do want to continue the learning path I'm on through ACG, and potentially take the Data and Analytics specialty exam in the next couple of years.
+You should have a great cloud foundation if you dove into the above resources and put in the work. You can comfortably build a VPC from scratch, you can start tinkering with your own cloud solutions, and you should be able to understand and contribute to your team's cloud strategy, even if your team uses another cloud provider.
+
+Although I do not think will proceed studying for the Solutions Architect Professional exam, I do want to improve my ability to set up cloud solutions for clients. I'm planning to learn more about tools like CloudFormation, Elastic Beanstalk, and all of the analytics services. I'm currently on the learning path through ACG to take the Data and Analytics specialty exam in the next couple of years.
 
 {{< figure src="/aws_cssa.webp" width="80%" >}}
