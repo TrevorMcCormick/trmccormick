@@ -21,9 +21,9 @@ Here is a link to [the exam guide](https://d1.awsstatic.com/training-and-certifi
 
 I felt like the first best step for me would be to get through all of the videos and exercises in [A Cloud Guru's - AWS Certified Solutions Architect Associate SAA-C02 course](https://acloud.guru/overview/aws-certified-solutions-architect-associate). There was 45 hours of content in this course alone, so it was definitely a big first step.  
 
-As I was going through this course, I browsed through some of the other offerings, and found the [AWS Well-Architected Framework course]](https://acloud.guru/overview/aws-well-architected-framework) fairly helpful. 
+As I was going through this course, I browsed through some of the other offerings, and found the [AWS Well-Architected Framework course](https://acloud.guru/overview/aws-well-architected-framework) fairly helpful. 
 
-What I found MOST helpful was the hands-on labs. Here is a curated list of labs I found most helpful:
+What I found most helpful was the hands-on labs. Here is a curated list of labs I found most helpful:
 
 * [ALBs and Auto-Scaling](https://learn.acloud.guru/handson/feb3bc2b-c912-4f5c-94d7-bfbedea6319f)
 * [AMIs](https://learn.acloud.guru/handson/a95ff0ea-4d92-4c80-ad92-35f42389b4a4) 
