@@ -17,9 +17,9 @@
 {{ $animation_type := strings.TrimPrefix "." (path.Ext $destination) | lower }}
 
 {{ if eq $animation_type "json" }}
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@0.4.0/dist/lottie-player.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <lottie-player autoplay loop mode="normal" src="{{ $destination }}" style="width: {{ .Get "width" }}; height:auto"></lottie-player>
 {{ else if eq $animation_type "tgs" }}
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@0.4.0/dist/tgs-player.js"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <tgs-player autoplay loop mode="normal" src="{{ $destination }}" style="width: {{ .Get "width" }}; height:auto"></tgs-player>
 {{ end }}
