@@ -5,7 +5,7 @@
             <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
                 {{- with .Site.Params.header.title -}}
                     {{- with .logo -}}
-                        {{- dict "Src" . "Class" "logo" | partial "plugin/image.html" -}}
+                        {{- dict "Src" . "Class" "logo" | partial "plugin/lottie.html" -}}
                     {{- end -}}
                     {{- with .pre -}}
                         <span class="header-title-pre">{{ . | safeHTML }}</span>
@@ -93,7 +93,7 @@
                 <a href="{{ .Site.Home.RelPermalink }}" title="{{ .Site.Title }}">
                     {{- with .Site.Params.header.title -}}
                         {{- with .logo -}}
-                            {{- dict "Src" . "Class" "logo" | partial "plugin/image.html" -}}
+                            {{- dict "Src" . "Class" "logo" | partial "plugin/lottie.html" -}}
                         {{- end -}}
                         {{- with .pre -}}
                             <span class="header-title-pre">{{ . | safeHTML }}</span>
@@ -188,3 +188,4 @@
     <div id="search-dropdown-mobile"></div>
 </div>
 {{- end -}}
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
