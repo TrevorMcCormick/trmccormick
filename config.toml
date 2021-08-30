@@ -212,7 +212,7 @@ copyright = ""
     # Header title config
     [params.header.title]
       # URL of the LOGO
-      logo = "/images/cloud_blob.json"
+      logo = "/cloud_blob.json"
       # title name
       name = ""
       # you can add extra information before the name (HTML format is supported), such as icons
