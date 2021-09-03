@@ -18,7 +18,7 @@ Below is an AWS architecture diagram I created using [diagrams.net](diagrams.net
 5. **GitHub** -- hosting your code
 6. **CodeBuild** -- building your Hugo site (CI/CD)
 
-{{< figure src="trmccormick.com.webp" width="80%" >}}
+{{< figure src="/trmccormick.com.webp" width="80%" >}}
  
 ## Route53
 I pay $0.50 per month for one hosted zone on [Route53](https://aws.amazon.com/route53/). AWS actually created this hosted zone for me when I purchased my domain through Route53. 
