@@ -4,7 +4,9 @@ phases:
   install:
     commands:
       - echo Entered the install phase...
-      - yum install golang-1.16 -y
+      - wget https://golang.org/dl/go1.16.7.linux-amd64.tar.gz
+      - tar -xzf go1.16.7.linux-amd64.tar.gz
+      - yum install gcc-c++ -y
       - yum install curl -y
       - yum install asciidoctor -y
       - mkdir $HOME/src
