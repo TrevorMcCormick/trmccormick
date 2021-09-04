@@ -4,14 +4,14 @@ phases:
   install:
     commands:
       - echo Entered the install phase...
-      - yum install golang -y
+      - yum install golang-1.16 -y
       - yum install curl -y
       - yum install asciidoctor -y
       - mkdir $HOME/src
       - cd $HOME/src
       - git clone https://github.com/gohugoio/hugo.git
       - cd hugo
-      - go install --tags extended
+      - go install --tags extended -y
     finally:
       - echo Installation done
   build:
