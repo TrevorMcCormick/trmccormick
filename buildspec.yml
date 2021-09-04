@@ -13,7 +13,7 @@ phases:
       - cd $HOME/src
       - git clone https://github.com/gohugoio/hugo.git
       - cd hugo
-      - go install --tags extended -y
+      - go install --tags extended
     finally:
       - echo Installation done
   build:
