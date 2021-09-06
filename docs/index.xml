@@ -4,9 +4,17 @@
         <link>https://trmccormick.com/</link>
         <description>trmccormick</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language><managingEditor>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</managingEditor>
-            <webMaster>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</webMaster><lastBuildDate>Wed, 02 Jun 2021 11:20:22 -0400</lastBuildDate>
+            <webMaster>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</webMaster><lastBuildDate>Sun, 05 Sep 2021 08:08:22 -0400</lastBuildDate>
             <atom:link href="https://trmccormick.com/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Buildspec for Hugo Extended on Amazon Linux 2</title>
+    <link>https://trmccormick.com/hugo_extended/</link>
+    <pubDate>Sun, 05 Sep 2021 08:08:22 -0400</pubDate><author>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</author><guid>https://trmccormick.com/hugo_extended/</guid>
+    <description><![CDATA[Are you frustrated that your Hugo website builds are not reflecting your local changes? If you&rsquo;re using scss files to manage your website styling, and the changes you make locally are not showing up on web server, then you might be facing challenges installing Hugo Extended.
+Here are some common errors you might see in AWS CloudWatch:
+1 2  hugo: /lib64/libm.so.6: version &#39;GLIBC_2.29&#39; not found (required by hugo) hugo: /lib64/libstdc++.]]></description>
+</item>
+<item>
     <title>Preparing for the AWS Certified Solutions Architect Associate Exam</title>
     <link>https://trmccormick.com/aws_certified_solutions_architect_associate/</link>
     <pubDate>Wed, 02 Jun 2021 11:20:22 -0400</pubDate><author>trevor.ryan.mccormick@gmail.com (Trevor McCormick)</author><guid>https://trmccormick.com/aws_certified_solutions_architect_associate/</guid>
