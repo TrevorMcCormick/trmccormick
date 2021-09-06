@@ -10,8 +10,6 @@ phases:
       - export GOROOT=/usr/local/go 
       - export PATH=$GOPATH/bin:$GOROOT/bin:$PATH 
       - go version 
-      - yum install gcc-c++ -y
-      - yum install curl -y
       - yum install asciidoctor -y
       - mkdir $HOME/src
       - cd $HOME/src
