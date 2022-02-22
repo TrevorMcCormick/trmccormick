@@ -2,7 +2,7 @@
 title: "Buildspec for Hugo Extended on Amazon Linux 2"
 date: 2021-09-05T08:08:22-04:00
 draft: false
-tags: [AWS. Hugo]
+tags: [AWS, Hugo]
 resources:
 - name: "featured-image"
   src: "lakehouse.webp"
