@@ -33,8 +33,8 @@ phases:
   install:
     commands:
       - echo Entered the install phase...
-      - wget https://golang.org/dl/go1.16.7.linux-amd64.tar.gz #installs Go 1.16.7
-      - tar -xzf go1.16.7.linux-amd64.tar.gz #extracts gzipped archive file
+      - wget https://golang.org/dl/go1.18.linux-amd64.tar.gz #installs Go 1.16.7
+      - tar -xzf go1.18.linux-amd64.tar.gz #extracts gzipped archive file
       - mv go /usr/local  #moves go to /usr/local
       - export GOROOT=/usr/local/go #adds go to env variable
       - export PATH=$GOPATH/bin:$GOROOT/bin:$PATH  #adds go to path
@@ -44,6 +44,7 @@ phases:
       - cd $HOME/src #go to src dir
       - git clone https://github.com/gohugoio/hugo.git #clone hugo
       - cd hugo #go to hugo dir
+      - go mod download github.com/yuin/goldmark #new requirement download
       - go install --tags extended #use go to install extended hugo
     finally:
       - echo Installation done
