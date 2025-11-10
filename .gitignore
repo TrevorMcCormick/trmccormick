@@ -1,0 +1,57 @@
+# Docusaurus
+node_modules/
+build/
+.docusaurus/
+.cache-loader/
+package-lock.json
+yarn.lock
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+.directory
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+tmp/
+temp/
+
+# Generated PageSpeed reports
+pagespeed-reports/
+
+# Generated PageSpeed metrics data (fetched at build time)
+static/data/
+
+# Local Claude config
+.claude/
