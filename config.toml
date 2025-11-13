@@ -30,10 +30,12 @@ languageCode = "en"
 languageName = "English"
 # whether to include Chinese/Japanese/Korean
 hasCJKLanguage = false
-# default amount of posts in each pages
-paginate = 12
 # copyright description used only for seo schema
 copyright = ""
+
+# Pagination config
+[pagination]
+  pagerSize = 12
 
 # Menu config
 [menu]
