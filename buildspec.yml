@@ -8,14 +8,16 @@ phases:
       - tar -xzf go1.23.3.linux-amd64.tar.gz
       - mv go /usr/local
       - export GOROOT=/usr/local/go
+      - export GOPATH=$HOME/go
       - export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-      - go version 
+      - go version
       - yum install asciidoctor -y
-      - mkdir $HOME/src
+      - mkdir -p $HOME/src
       - cd $HOME/src
-      - git clone https://github.com/gohugoio/hugo.git
+      - git clone --branch v0.139.4 --depth 1 https://github.com/gohugoio/hugo.git
       - cd hugo
       - go install --tags extended
+      - hugo version
     finally:
       - echo Installation done
   build:
@@ -23,19 +25,16 @@ phases:
       - echo Building...
       - echo Build started on `date`
       - cd $CODEBUILD_SRC_DIR
+      - export PATH=$HOME/go/bin:$PATH
       - hugo --quiet --minify
       - echo Uploading with optimized cache headers...
-      # Sync HTML files with short cache (1 hour)
-      - aws s3 sync --delete --exclude "*" --include "*.html" --cache-control "public, max-age=3600" docs/ s3://trmccormick.com
-      # Sync CSS files with long cache (1 year) - fingerprinted
-      - aws s3 sync --delete --exclude "*" --include "*.css" --cache-control "public, max-age=31536000, immutable" docs/ s3://trmccormick.com
-      # Sync JS files with long cache (1 year) - fingerprinted
-      - aws s3 sync --delete --exclude "*" --include "*.js" --cache-control "public, max-age=31536000, immutable" docs/ s3://trmccormick.com
-      # Sync JSON files with short cache
-      - aws s3 sync --delete --exclude "*" --include "*.json" --cache-control "public, max-age=3600" docs/ s3://trmccormick.com
-      # Sync images with long cache (1 year)
-      - aws s3 sync --delete --exclude "*" --include "*.webp" --include "*.jpg" --include "*.jpeg" --include "*.png" --include "*.gif" --include "*.svg" --cache-control "public, max-age=31536000, immutable" docs/ s3://trmccormick.com
-      # Sync remaining files
+      # Sync files with appropriate cache headers (no --delete on individual syncs to avoid conflicts)
+      - aws s3 sync --exclude "*" --include "*.html" --cache-control "public, max-age=3600" docs/ s3://trmccormick.com
+      - aws s3 sync --exclude "*" --include "*.css" --cache-control "public, max-age=31536000, immutable" docs/ s3://trmccormick.com
+      - aws s3 sync --exclude "*" --include "*.js" --cache-control "public, max-age=31536000, immutable" docs/ s3://trmccormick.com
+      - aws s3 sync --exclude "*" --include "*.json" --cache-control "public, max-age=3600" docs/ s3://trmccormick.com
+      - aws s3 sync --exclude "*" --include "*.webp" --include "*.jpg" --include "*.jpeg" --include "*.png" --include "*.gif" --include "*.svg" --cache-control "public, max-age=31536000, immutable" docs/ s3://trmccormick.com
+      # Final sync with --delete to remove old files and catch any remaining files
       - aws s3 sync --delete docs/ s3://trmccormick.com
       - echo Creating CloudFront invalidation...
       - aws cloudfront create-invalidation --distribution-id E31546NI4VOO5F --paths '/*'
@@ -44,5 +43,5 @@ phases:
 artifacts:
   files:
     - '**/*'
-  base-directory: $CODEBUILD_SRC_DIR/docs
+  base-directory: docs
   discard-paths: no
