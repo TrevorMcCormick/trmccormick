@@ -4,11 +4,11 @@ phases:
   install:
     commands:
       - echo Entered the install phase...
-      - wget https://golang.org/dl/go1.18.linux-amd64.tar.gz
-      - tar -xzf go1.18.linux-amd64.tar.gz
-      - mv go /usr/local  
-      - export GOROOT=/usr/local/go 
-      - export PATH=$GOPATH/bin:$GOROOT/bin:$PATH 
+      - wget https://golang.org/dl/go1.23.3.linux-amd64.tar.gz
+      - tar -xzf go1.23.3.linux-amd64.tar.gz
+      - mv go /usr/local
+      - export GOROOT=/usr/local/go
+      - export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
       - go version 
       - yum install asciidoctor -y
       - mkdir $HOME/src
