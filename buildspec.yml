@@ -24,8 +24,21 @@ phases:
       - echo Building...
       - echo Build started on `date`
       - cd $CODEBUILD_SRC_DIR
-      - hugo --quiet
+      - hugo --quiet --minify
+      - echo Uploading with optimized cache headers...
+      # Sync HTML files with short cache (1 hour)
+      - aws s3 sync --delete --exclude "*" --include "*.html" --cache-control "public, max-age=3600" docs/ s3://trmccormick.com
+      # Sync CSS files with long cache (1 year) - fingerprinted
+      - aws s3 sync --delete --exclude "*" --include "*.css" --cache-control "public, max-age=31536000, immutable" docs/ s3://trmccormick.com
+      # Sync JS files with long cache (1 year) - fingerprinted
+      - aws s3 sync --delete --exclude "*" --include "*.js" --cache-control "public, max-age=31536000, immutable" docs/ s3://trmccormick.com
+      # Sync JSON files with short cache
+      - aws s3 sync --delete --exclude "*" --include "*.json" --cache-control "public, max-age=3600" docs/ s3://trmccormick.com
+      # Sync images with long cache (1 year)
+      - aws s3 sync --delete --exclude "*" --include "*.webp" --include "*.jpg" --include "*.jpeg" --include "*.png" --include "*.gif" --include "*.svg" --cache-control "public, max-age=31536000, immutable" docs/ s3://trmccormick.com
+      # Sync remaining files
       - aws s3 sync --delete docs/ s3://trmccormick.com
+      - echo Creating CloudFront invalidation...
       - aws cloudfront create-invalidation --distribution-id E31546NI4VOO5F --paths '/*'
     finally:
       - echo Build finished
