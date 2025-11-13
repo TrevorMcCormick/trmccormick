@@ -1,11 +1,41 @@
 {{- $params := .Scratch.Get "params" -}}
 {{- $offline := $params.offline -}}
+{{- $description := $params.description | default .Site.Params.description -}}
 
-<meta name="description" content="{{ $params.description | default .Site.Params.description }}">
+{{- /* Meta Description */ -}}
+<meta name="description" content="{{ $description }}">
+{{- with .Site.Params.keywords -}}
+<meta name="keywords" content="{{ . }}">
+{{- end -}}
+
+{{- /* Author Meta */ -}}
+<meta name="author" content="{{ .Site.Author.name }}">
 
 {{- if ne $offline true -}}
+{{- /* Open Graph */ -}}
 {{- template "_internal/opengraph.html" . -}}
+{{- /* Additional OG tags for articles */ -}}
+{{- if .IsPage -}}
+<meta property="article:author" content="{{ .Site.Author.name }}">
+{{- with .PublishDate -}}
+<meta property="article:published_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">
+{{- end -}}
+{{- with .Lastmod -}}
+<meta property="article:modified_time" content="{{ .Format "2006-01-02T15:04:05Z07:00" }}">
+{{- end -}}
+{{- with .Params.tags -}}
+{{- range . -}}
+<meta property="article:tag" content="{{ . }}">
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{- /* Twitter Cards */ -}}
 {{- template "_internal/twitter_cards.html" . -}}
+{{- /* Twitter Author */ -}}
+{{- with .Site.Params.social.Twitter -}}
+<meta name="twitter:creator" content="@{{ . }}">
+{{- end -}}
 {{- end -}}
 
 <meta name="application-name" content="{{ .Site.Params.app.title | default .Site.Title }}">

@@ -61,6 +61,30 @@
 {{- end -}}
 
 {{- if ne $offline true -}}
+{{- /* Resource hints for performance */ -}}
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+{{- /* Preload critical CSS */ -}}
+{{- $fontawesomeSource := $cdn.fontawesomeFreeCSS | default "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" -}}
+<link rel="preload" as="style" href="{{ $fontawesomeSource }}" crossorigin>
+{{- $animateSource := $cdn.animateCSS | default "https://cdn.jsdelivr.net/npm/animate.css@3/animate.min.css" -}}
+<link rel="preload" as="style" href="{{ $animateSource }}" crossorigin>
+
+{{- /* Load FontAwesome and Animate CSS early */ -}}
+{{- if $params.cdnfontawesome -}}
+{{- $source := $cdn.fontawesomeFreeCSS | default "lib/fontawesome-free/all.min.css" -}}
+{{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
+{{- partial "plugin/style.html" $style -}}
+{{- else -}}
+{{- $source := "lib/fontawesome-free/all.min.css" -}}
+{{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
+{{- partial "plugin/style.html" $style -}}
+{{- end -}}
+{{- $source := $cdn.animateCSS | default "lib/animate/animate.min.css" -}}
+{{- $style := dict "Source" $source "Fingerprint" $fingerprint -}}
+{{- partial "plugin/style.html" $style -}}
+
 {{- $analytics := .Site.Config.Privacy.GoogleAnalytics -}}
 {{- if not $analytics.Disable }}{{ with .Site.GoogleAnalytics -}}
     {{ if hasPrefix . "G-"}}
