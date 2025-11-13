@@ -73,15 +73,15 @@ copyright = ""
   # public git repo url only then enableGitInfo is true
   gitRepo = "https://github.com/TrevorMcCormick/trmccormick"
   # which hash function used for SRI, when empty, no SRI is used ("sha256", "sha384", "sha512", "md5")
-  fingerprint = ""
+  fingerprint = "sha256"
   # date format
   dateFormat = "2006-01-02"
   # website images for Open Graph and Twitter Cards
   images = ["assets/images/cloud_repo.webp"]
   # site description
-  description = ""
+  description = "Trevor McCormick's portfolio - Product Manager, Data Engineer, and Designer. AWS certifications, technical tutorials, and product insights."
   # site keywords
-  keywords = ""
+  keywords = "Trevor McCormick, Product Manager, Data Engineer, AWS, Hugo, Python, UX Design"
   # whether to enable CSS and JS source mapping
   SourceMap = false
 
@@ -565,6 +565,12 @@ copyright = ""
   section = ["HTML", "RSS"]
   taxonomy = ["HTML", "RSS"]
   taxonomyTerm = ["HTML"]
+
+# Sitemap configuration for SEO
+[sitemap]
+  changefreq = "weekly"
+  filename = "sitemap.xml"
+  priority = 0.5
 
 # Minify config
 [minify]
