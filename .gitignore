@@ -49,3 +49,11 @@ package-lock.json
 # Temporary files
 tmp/
 temp/
+
+# Local documentation and config
+.claude/
+OPTIMIZATION_SUMMARY.md
+PERFORMANCE_ANALYSIS.md
+SEO_OPTIMIZATION.md
+archetypes/
+layouts/
