@@ -1,6 +1,6 @@
 <style>
 #instafeed {
-  margin: 0; 
+  margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -41,7 +41,7 @@
 #instafeed li:hover a::after {
   content: "";
   position: absolute;
-  left: 0; 
+  left: 0;
   top: 0;
   width: 100%;
   height: 100%;
@@ -50,7 +50,19 @@
 }
 </style>
 
-{{ $dataJ := getJSON "https://profilepageimages.usecue.com/images/trmccormick92/images.json" }}
+{{- $url := "https://profilepageimages.usecue.com/images/trmccormick92/images.json" -}}
+{{- $dataJ := slice -}}
+{{- with resources.GetRemote $url -}}
+  {{- with .Err -}}
+    {{- warnf "Failed to fetch Instagram feed: %s" . -}}
+  {{- else -}}
+    {{- $dataJ = . | transform.Unmarshal -}}
+  {{- end -}}
+{{- else -}}
+  {{- warnf "Failed to get remote resource: %s" $url -}}
+{{- end -}}
+
+{{- if $dataJ -}}
 <ul id="instafeed">
   {{ range first 5 $dataJ }}
     {{ $media_type := .media_type | lower }}
@@ -64,3 +76,4 @@
     </li>
   {{ end }}
 </ul>
+{{- end -}}
