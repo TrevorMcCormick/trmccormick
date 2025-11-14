@@ -30,9 +30,9 @@
     {
       "@type": "Person",
       "@id": "{{ .Site.BaseURL }}#person",
-      "name": "{{ .Site.Author.name }}",
-      "url": "{{ .Site.BaseURL }}{{ .Site.Author.link }}",
-      "email": "{{ .Site.Author.email }}",
+      "name": "{{ .Site.Params.Author.name }}",
+      "url": "{{ .Site.BaseURL }}{{ .Site.Params.Author.link }}",
+      "email": "{{ .Site.Params.Author.email }}",
       "sameAs": [
         {{- with .Site.Params.social.GitHub -}}"https://github.com/{{ . }}",{{- end -}}
         {{- with .Site.Params.social.Linkedin -}}"https://linkedin.com/in/{{ . }}",{{- end -}}
@@ -54,13 +54,13 @@
       {{- end -}}
       "author": {
         "@type": "Person",
-        "name": "{{ .Site.Author.name }}",
-        "url": "{{ .Site.BaseURL }}{{ .Site.Author.link }}"
+        "name": "{{ .Site.Params.Author.name }}",
+        "url": "{{ .Site.BaseURL }}{{ .Site.Params.Author.link }}"
       },
       "publisher": {
         "@type": "Person",
-        "name": "{{ .Site.Author.name }}",
-        "url": "{{ .Site.BaseURL }}{{ .Site.Author.link }}"
+        "name": "{{ .Site.Params.Author.name }}",
+        "url": "{{ .Site.BaseURL }}{{ .Site.Params.Author.link }}"
       },
       {{- with .Params.tags -}}
       "keywords": "{{ delimit . ", " }}",

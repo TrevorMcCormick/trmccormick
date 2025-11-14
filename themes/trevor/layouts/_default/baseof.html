@@ -18,7 +18,7 @@
         {{- partial "head/seo.html" . -}}
 
         {{- $analytics := .Site.Config.Privacy.GoogleAnalytics -}}
-        {{- if not $analytics.Disable }}{{ with .Site.GoogleAnalytics -}}
+        {{- if not $analytics.Disable }}{{ with .Site.Config.Services.GoogleAnalytics.ID -}}
             {{ template "_internal/google_analytics.html" . }}
         {{- end -}}{{ end -}}
     </head>
