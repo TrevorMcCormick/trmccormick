@@ -1,0 +1,10 @@
+aws_region            = "us-east-1"
+project_name          = "pagespeed-monitor"
+environment           = "prod"
+target_url            = "https://trmccormick.com"
+github_webhook_secret = "your-random-secret-token-here"  # Generate with: openssl rand -hex 32
+pagespeed_api_key     = ""  # Optional: Get from https://console.cloud.google.com/apis/credentials
+github_token          = ""  # Optional: GitHub PAT with repo write permissions for report generation
+github_repo           = ""  # Optional: Repository in format "owner/repo" (e.g., "trmccormick/trmccormick")
+alert_email           = ""  # Optional: Email address to receive PageSpeed alerts
+alert_threshold       = 5   # Optional: Score drop threshold (in points) to trigger alerts
