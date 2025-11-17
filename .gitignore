@@ -59,3 +59,4 @@ SEO_OPTIMIZATION.md
 
 # Allow layouts/shortcodes but ignore theme layouts
 # /layouts/ - Removed to allow custom shortcodes
+/docs/
