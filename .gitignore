@@ -56,4 +56,6 @@ OPTIMIZATION_SUMMARY.md
 PERFORMANCE_ANALYSIS.md
 SEO_OPTIMIZATION.md
 /archetypes/
-/layouts/
+
+# Allow layouts/shortcodes but ignore theme layouts
+# /layouts/ - Removed to allow custom shortcodes
