@@ -1,0 +1,502 @@
+{{/*
+  PageSpeed Insights Chart Shortcode
+
+  Usage in markdown:
+    {{< pagespeed-chart api-url="YOUR_API_GATEWAY_URL" >}}
+
+  Parameters:
+    - api-url: The API Gateway endpoint URL (required)
+    - height: Chart height in pixels (default: 500)
+    - show-mobile: Show mobile scores (default: true)
+*/}}
+
+{{ $apiUrl := .Get "api-url" }}
+{{ $height := .Get "height" | default "500" }}
+{{ $showMobile := .Get "show-mobile" | default "true" }}
+
+<div class="pagespeed-monitoring">
+  <!-- Summary Cards -->
+  <div class="pagespeed-summary" id="pagespeed-summary">
+    <div class="summary-card loading">
+      <div class="card-title">Desktop Score</div>
+      <div class="card-value" id="desktop-score">--</div>
+      <div class="card-trend" id="desktop-trend"></div>
+    </div>
+    <div class="summary-card loading">
+      <div class="card-title">Mobile Score</div>
+      <div class="card-value" id="mobile-score">--</div>
+      <div class="card-trend" id="mobile-trend"></div>
+    </div>
+    <div class="summary-card loading">
+      <div class="card-title">Total Checks</div>
+      <div class="card-value" id="total-checks">--</div>
+      <div class="card-subtitle" id="date-range"></div>
+    </div>
+  </div>
+
+  <!-- Main Chart -->
+  <div class="pagespeed-chart-container">
+    <canvas id="pagespeed-chart" style="height: {{ $height }}px;"></canvas>
+  </div>
+
+  <!-- Top Opportunities -->
+  <div class="pagespeed-opportunities">
+    <h3>Current Optimization Opportunities</h3>
+    <div id="opportunities-list" class="opportunities-loading">
+      <p>Loading optimization suggestions...</p>
+    </div>
+  </div>
+</div>
+
+<!-- Chart.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+<!-- Styling -->
+<style>
+.pagespeed-monitoring {
+  margin: 2rem 0;
+}
+
+.pagespeed-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.summary-card {
+  background: var(--card-bg, #f8f9fa);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid var(--border-color, #e1e4e8);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.summary-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.summary-card.loading {
+  opacity: 0.6;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.8; }
+}
+
+.card-title {
+  font-size: 0.875rem;
+  color: var(--text-muted, #6c757d);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.card-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary, #212529);
+  margin-bottom: 0.25rem;
+}
+
+.card-value.good {
+  color: #28a745;
+}
+
+.card-value.average {
+  color: #ffc107;
+}
+
+.card-value.poor {
+  color: #dc3545;
+}
+
+.card-trend {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.card-trend.positive {
+  color: #28a745;
+}
+
+.card-trend.negative {
+  color: #dc3545;
+}
+
+.card-trend.neutral {
+  color: #6c757d;
+}
+
+.card-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted, #6c757d);
+  margin-top: 0.25rem;
+}
+
+.pagespeed-chart-container {
+  background: var(--card-bg, #ffffff);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.pagespeed-opportunities {
+  background: var(--card-bg, #f8f9fa);
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color, #e1e4e8);
+}
+
+.pagespeed-opportunities h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.opportunity-item {
+  background: var(--card-bg, #ffffff);
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #ffc107;
+}
+
+.opportunity-item:last-child {
+  margin-bottom: 0;
+}
+
+.opportunity-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.opportunity-savings {
+  font-size: 0.875rem;
+  color: #28a745;
+  font-weight: 700;
+}
+
+.opportunity-description {
+  font-size: 0.875rem;
+  color: var(--text-muted, #6c757d);
+  line-height: 1.5;
+}
+
+.opportunity-badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background: #e3f2fd;
+  color: #1976d2;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.opportunities-loading {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted, #6c757d);
+}
+
+@media (prefers-color-scheme: dark) {
+  .summary-card, .pagespeed-chart-container, .pagespeed-opportunities {
+    background: var(--card-bg, #1a1a1a);
+    border-color: var(--border-color, #333);
+  }
+
+  .opportunity-item {
+    background: var(--card-bg, #2a2a2a);
+  }
+}
+</style>
+
+<!-- Chart Script -->
+<script>
+(function() {
+  const API_URL = '{{ $apiUrl }}';
+  let chart = null;
+
+  // Fetch and render data
+  async function loadPageSpeedData() {
+    try {
+      const response = await fetch(`${API_URL}/metrics/summary`);
+      if (!response.ok) throw new Error('Failed to fetch data');
+
+      const data = await response.json();
+
+      // Update summary cards
+      updateSummaryCards(data);
+
+      // Render chart
+      renderChart(data);
+
+      // Show opportunities
+      showOpportunities(data);
+
+    } catch (error) {
+      console.error('Error loading PageSpeed data:', error);
+      document.getElementById('pagespeed-summary').innerHTML =
+        '<div class="alert alert-danger">Failed to load PageSpeed data. Please try again later.</div>';
+    }
+  }
+
+  function updateSummaryCards(data) {
+    const desktopScore = data.current.desktop_score;
+    const mobileScore = data.current.mobile_score;
+    const totalChecks = data.total_measurements;
+
+    // Desktop score
+    const desktopEl = document.getElementById('desktop-score');
+    desktopEl.textContent = Math.round(desktopScore);
+    desktopEl.className = 'card-value ' + getScoreClass(desktopScore);
+
+    // Desktop trend
+    const desktopTrend = data.statistics.desktop.trend;
+    const desktopTrendEl = document.getElementById('desktop-trend');
+    desktopTrendEl.textContent = formatTrend(desktopTrend);
+    desktopTrendEl.className = 'card-trend ' + getTrendClass(desktopTrend);
+
+    // Mobile score
+    const mobileEl = document.getElementById('mobile-score');
+    mobileEl.textContent = Math.round(mobileScore);
+    mobileEl.className = 'card-value ' + getScoreClass(mobileScore);
+
+    // Mobile trend
+    const mobileTrend = data.statistics.mobile.trend;
+    const mobileTrendEl = document.getElementById('mobile-trend');
+    mobileTrendEl.textContent = formatTrend(mobileTrend);
+    mobileTrendEl.className = 'card-trend ' + getTrendClass(mobileTrend);
+
+    // Total checks
+    document.getElementById('total-checks').textContent = totalChecks;
+    document.getElementById('total-checks').className = 'card-value';
+
+    // Date range
+    const startDate = new Date(data.date_range.start).toLocaleDateString();
+    const endDate = new Date(data.date_range.end).toLocaleDateString();
+    document.getElementById('date-range').textContent = `${startDate} - ${endDate}`;
+
+    // Remove loading state
+    document.querySelectorAll('.summary-card').forEach(card => {
+      card.classList.remove('loading');
+    });
+  }
+
+  function getScoreClass(score) {
+    if (score >= 90) return 'good';
+    if (score >= 50) return 'average';
+    return 'poor';
+  }
+
+  function getTrendClass(trend) {
+    if (trend > 0) return 'positive';
+    if (trend < 0) return 'negative';
+    return 'neutral';
+  }
+
+  function formatTrend(trend) {
+    if (trend === 0) return '—';
+    const sign = trend > 0 ? '+' : '';
+    return `${sign}${trend.toFixed(1)} since first check`;
+  }
+
+  function renderChart(data) {
+    const ctx = document.getElementById('pagespeed-chart').getContext('2d');
+
+    const historicalData = data.historical_data;
+    const labels = historicalData.map(d => {
+      const date = new Date(d.timestamp);
+      return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    });
+
+    const datasets = [
+      {
+        label: 'Desktop',
+        data: historicalData.map(d => d.desktop_score),
+        borderColor: '#4285f4',
+        backgroundColor: 'rgba(66, 133, 244, 0.1)',
+        tension: 0.4,
+        fill: true,
+        pointRadius: 5,
+        pointHoverRadius: 7,
+        pointBackgroundColor: '#4285f4',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2
+      }
+    ];
+
+    {{ if eq $showMobile "true" }}
+    datasets.push({
+      label: 'Mobile',
+      data: historicalData.map(d => d.mobile_score),
+      borderColor: '#ea4335',
+      backgroundColor: 'rgba(234, 67, 53, 0.1)',
+      tension: 0.4,
+      fill: true,
+      pointRadius: 5,
+      pointHoverRadius: 7,
+      pointBackgroundColor: '#ea4335',
+      pointBorderColor: '#fff',
+      pointBorderWidth: 2
+    });
+    {{ end }}
+
+    if (chart) {
+      chart.destroy();
+    }
+
+    chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: datasets
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: {
+          mode: 'index',
+          intersect: false
+        },
+        plugins: {
+          legend: {
+            display: true,
+            position: 'top',
+            labels: {
+              usePointStyle: true,
+              padding: 20,
+              font: { size: 14 }
+            }
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            padding: 12,
+            titleFont: { size: 14, weight: 'bold' },
+            bodyFont: { size: 13 },
+            callbacks: {
+              title: function(context) {
+                const index = context[0].dataIndex;
+                const item = historicalData[index];
+                return new Date(item.timestamp).toLocaleDateString('en-US', {
+                  weekday: 'short',
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                });
+              },
+              afterBody: function(context) {
+                const index = context[0].dataIndex;
+                const item = historicalData[index];
+                return `\nCommit: ${item.commit_sha}\nClick to view on GitHub`;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              callback: function(value) {
+                return value;
+              }
+            },
+            title: {
+              display: true,
+              text: 'Performance Score',
+              font: { size: 14, weight: 'bold' }
+            },
+            grid: {
+              color: 'rgba(0, 0, 0, 0.05)'
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: 'Measurement Date',
+              font: { size: 14, weight: 'bold' }
+            }
+          }
+        },
+        onClick: (event, elements) => {
+          if (elements.length > 0) {
+            const index = elements[0].index;
+            const commitSha = data.current.commit.sha;
+            const repoUrl = data.current.commit.url.split('/commit/')[0];
+            window.open(`${repoUrl}/commit/${commitSha}`, '_blank');
+          }
+        }
+      }
+    });
+  }
+
+  function showOpportunities(data) {
+    const container = document.getElementById('opportunities-list');
+    const desktopOpp = data.top_opportunities.desktop || [];
+    const mobileOpp = data.top_opportunities.mobile || [];
+
+    if (desktopOpp.length === 0 && mobileOpp.length === 0) {
+      container.innerHTML = '<p>No optimization opportunities found. Great job!</p>';
+      return;
+    }
+
+    let html = '';
+
+    if (desktopOpp.length > 0) {
+      html += '<h4><span class="opportunity-badge">Desktop</span></h4>';
+      desktopOpp.slice(0, 3).forEach(opp => {
+        html += `
+          <div class="opportunity-item">
+            <div class="opportunity-title">
+              <span>${opp.title}</span>
+              <span class="opportunity-savings">~${Math.round(opp.savings_ms / 1000)}s savings</span>
+            </div>
+            <div class="opportunity-description">${opp.description}</div>
+          </div>
+        `;
+      });
+    }
+
+    {{ if eq $showMobile "true" }}
+    if (mobileOpp.length > 0) {
+      html += '<h4 style="margin-top: 1.5rem;"><span class="opportunity-badge">Mobile</span></h4>';
+      mobileOpp.slice(0, 3).forEach(opp => {
+        html += `
+          <div class="opportunity-item">
+            <div class="opportunity-title">
+              <span>${opp.title}</span>
+              <span class="opportunity-savings">~${Math.round(opp.savings_ms / 1000)}s savings</span>
+            </div>
+            <div class="opportunity-description">${opp.description}</div>
+          </div>
+        `;
+      });
+    }
+    {{ end }}
+
+    container.innerHTML = html;
+    container.classList.remove('opportunities-loading');
+  }
+
+  // Load data when page loads
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadPageSpeedData);
+  } else {
+    loadPageSpeedData();
+  }
+})();
+</script>
