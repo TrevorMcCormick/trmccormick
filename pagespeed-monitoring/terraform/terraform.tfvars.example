@@ -1,0 +1,24 @@
+# Copy this file to terraform.tfvars and fill in your values
+
+# AWS Configuration
+aws_region  = "us-east-1"
+environment = "prod"
+
+# Your Website and GitHub
+target_website_url = "https://trmccormick.com"
+github_repo        = "yourusername/trmccormick"  # Update with your GitHub username
+
+# API Keys (keep these secret!)
+pagespeed_api_key = ""  # Get from https://console.cloud.google.com/apis/credentials
+github_token      = ""  # Optional, only needed for private repos
+
+# Schedule (cron format)
+# Default: Every Monday at noon UTC
+# Format: cron(minutes hours day-of-month month day-of-week year)
+schedule_expression = "cron(0 12 ? * MON *)"
+
+# CORS Settings
+cors_allowed_origins = [
+  "https://trmccormick.com",
+  "http://localhost:1313"  # For local Hugo development
+]
