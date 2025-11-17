@@ -1,7 +1,7 @@
 ---
 title: "Building a Self-Monitoring Website with PageSpeed Insights and AWS"
 date: 2025-11-17T12:00:00-05:00
-draft: true
+draft: false
 tags: [AWS, Performance, Monitoring, Lambda, DynamoDB, API Gateway]
 description: "How I built a serverless PageSpeed monitoring system that tracks performance over time, correlates metrics with Git commits, and costs less than $1/month"
 ---
