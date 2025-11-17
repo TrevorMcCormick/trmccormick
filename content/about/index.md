@@ -29,6 +29,6 @@ Thanks for visiting my site! I use this site to share a variety of things I've l
 
 * 🧳 I enjoy traveling and trying to blend in with the locals along the way. Paris is my favorite city in the world, and I'd like to retire to France one day.
 
-{{< instafeed >}}
+<!-- Instagram feed temporarily disabled due to profilepageimages.usecue.com DNS issue -->
 
 
