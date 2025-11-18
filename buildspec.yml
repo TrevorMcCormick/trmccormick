@@ -1,0 +1,39 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Entered the install phase...
+      - echo Installing Node.js dependencies...
+      - node --version
+      - npm --version
+      - npm ci
+    finally:
+      - echo Installation done
+  build:
+    commands:
+      - echo Building...
+      - echo Build started on `date`
+      - npm run build
+      - echo Uploading with optimized cache headers...
+      # Sync files with appropriate cache headers (no --delete on individual syncs to avoid conflicts)
+      - aws s3 sync --exclude "*" --include "*.html" --cache-control "public, max-age=3600" build/ s3://trmccormick.com
+      - aws s3 sync --exclude "*" --include "*.css" --cache-control "public, max-age=31536000, immutable" build/ s3://trmccormick.com
+      - aws s3 sync --exclude "*" --include "*.js" --cache-control "public, max-age=31536000, immutable" build/ s3://trmccormick.com
+      - aws s3 sync --exclude "*" --include "*.json" --cache-control "public, max-age=3600" build/ s3://trmccormick.com
+      - aws s3 sync --exclude "*" --include "*.webp" --include "*.jpg" --include "*.jpeg" --include "*.png" --include "*.gif" --include "*.svg" --cache-control "public, max-age=31536000, immutable" build/ s3://trmccormick.com
+      # Final sync with --delete to remove old files and catch any remaining files
+      - aws s3 sync --delete build/ s3://trmccormick.com
+      - echo Creating CloudFront invalidation...
+      - aws cloudfront create-invalidation --distribution-id E31546NI4VOO5F --paths '/*'
+      - echo Waiting for invalidation to propagate...
+      - sleep 30
+      - echo Triggering PageSpeed Insights check...
+      - aws lambda invoke --function-name pagespeed-monitor-collector --region us-east-1 --invocation-type Event /tmp/pagespeed-response.json || echo "PageSpeed check triggered (async)"
+    finally:
+      - echo Build finished
+artifacts:
+  files:
+    - '**/*'
+  base-directory: build
+  discard-paths: no
