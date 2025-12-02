@@ -1,0 +1,36 @@
+---
+title: About Me
+description: Learn more about Trevor McCormick - Product, Data, and Basketball
+hide_table_of_contents: true
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import photoLocations from '../data/photo-locations.json';
+
+# About Me
+
+Welcome to my website! I try to write about data product management and sports.
+
+## Contact Me
+
+- GitHub: [trevormccormick](https://github.com/trevormccormick)
+- LinkedIn: [trevormccormick](https://linkedin.com/in/trevormccormick)
+
+## Travel Map
+{photoLocations.length > 0 && (
+  <>
+
+    My wife and I founded a family travel business. I have three daughters and we like to go adventure around the world together.
+
+    I'm learning how to be a better photographer and photo editor.
+
+    Here are some places we've been. Click on the pins to see photos from our adventures!
+
+    <BrowserOnly fallback={<div>Loading map...</div>}>
+      {() => {
+        const PhotoMap = require('../components/PhotoMap').default;
+        return <PhotoMap locations={photoLocations} />;
+      }}
+    </BrowserOnly>
+  </>
+)}
