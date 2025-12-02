@@ -1,0 +1,50 @@
+[
+  {
+    "filename": "playground.jpeg",
+    "path": "/travel-photos/denmark/playground.jpeg",
+    "latitude": 55.68250475591435,
+    "longitude": 12.56622434764373,
+    "name": "Playground in Ørstedsparken at Ahlefeldtsgade",
+    "description": "Copenhagen is so full of nature. This playground was next to an outdoor cafe in a large park. Beautiful"
+  },
+  {
+    "filename": "bellagio.jpeg",
+    "path": "/travel-photos/italy/bellagio.jpeg",
+    "latitude": 45.98773888888889,
+    "longitude": 9.260319444444445,
+    "name": "Lake Como - Bellagio",
+    "description": "We found ourselves hanging out quite often by the port downtown Bellagio to watch the boats and the ducks come and go."
+  },
+  {
+    "filename": "the-streets.jpeg",
+    "path": "/travel-photos/italy/the-streets.jpeg",
+    "latitude": 45.98661944444444,
+    "longitude": 9.262297222222223,
+    "name": "Streets of Bellagio",
+    "description": "With two girls still in a stroller, we had a tough time going up and down the steep hills."
+  },
+  {
+    "filename": "tremezzo.jpeg",
+    "path": "/travel-photos/italy/tremezzo.jpeg",
+    "latitude": 45.985327777777776,
+    "longitude": 9.227552777777777,
+    "name": "Grand Hotel Tremezzo",
+    "description": "We may have snuck up to the famous clay tennis court at GHT. Definitely a core memory for me and the girls."
+  },
+  {
+    "filename": "park.jpeg",
+    "path": "/travel-photos/netherlands/park.jpeg",
+    "latitude": 52.37011058698785,
+    "longitude": 4.882192820475275,
+    "name": "Johnny Jordaanplein",
+    "description": "A playground in the middle of the city is definitely our vibe."
+  },
+  {
+    "filename": "park.jpeg",
+    "path": "/travel-photos/portugal/park.jpeg",
+    "latitude": 38.71258908231121,
+    "longitude": -9.13181550219462,
+    "name": "Parque Infantil e de Lazer do Recolhimento",
+    "description": "We braved the steep streets to visit a gorgeous park, perfect for our kids to have lunch and play."
+  }
+]

@@ -1,0 +1,32 @@
+{
+  "italy/bellagio.jpeg": {
+    "name": "Lake Como - Bellagio",
+    "description": "We found ourselves hanging out quite often by the port downtown Bellagio to watch the boats and the ducks come and go."
+  },
+  "italy/the-streets.jpeg": {
+    "name": "Streets of Bellagio",
+    "description": "With two girls still in a stroller, we had a tough time going up and down the steep hills."
+  },
+  "italy/tremezzo.jpeg": {
+    "name": "Grand Hotel Tremezzo",
+    "description": "We may have snuck up to the famous clay tennis court at GHT. Definitely a core memory for me and the girls."
+  },
+  "portugal/park.jpeg": {
+    "name": "Parque Infantil e de Lazer do Recolhimento",
+    "description": "We braved the steep streets to visit a gorgeous park, perfect for our kids to have lunch and play.",
+    "latitude": 38.71258908231121,
+    "longitude": -9.13181550219462
+  },
+  "netherlands/park.jpeg": {
+    "name": "Johnny Jordaanplein",
+    "description": "A playground in the middle of the city is definitely our vibe.",
+    "latitude": 52.37011058698785,
+    "longitude": 4.882192820475275
+  },
+  "denmark/playground.jpeg": {
+    "name": "Playground in Ørstedsparken at Ahlefeldtsgade",
+    "description": "Copenhagen is so full of nature. This playground was next to an outdoor cafe in a large park. Beautiful",
+    "latitude": 55.68250475591435,
+    "longitude": 12.56622434764373
+  }
+}

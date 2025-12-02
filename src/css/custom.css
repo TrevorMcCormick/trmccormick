@@ -312,3 +312,54 @@ main hr {
   margin: 2rem 0;
   border-color: var(--ifm-color-emphasis-200);
 }
+
+/* Photo Map Responsive Styling */
+.leaflet-container {
+  font-family: var(--ifm-font-family-base);
+}
+
+/* Mobile responsive map */
+@media (max-width: 768px) {
+  .leaflet-container {
+    height: 400px !important;
+  }
+
+  .leaflet-popup-content {
+    max-width: 200px;
+  }
+
+  .leaflet-popup-content img {
+    max-width: 180px !important;
+    max-height: 180px !important;
+  }
+}
+
+/* Tablet and desktop */
+@media (min-width: 769px) {
+  .leaflet-container {
+    height: 600px !important;
+  }
+}
+
+/* Ensure map controls are accessible on mobile */
+.leaflet-control-zoom {
+  border: 2px solid rgba(0,0,0,0.2) !important;
+  border-radius: 4px !important;
+}
+
+.leaflet-bar a {
+  width: 32px !important;
+  height: 32px !important;
+  line-height: 32px !important;
+  font-size: 20px !important;
+}
+
+/* Dark mode support for map */
+[data-theme='dark'] .leaflet-popup-content-wrapper {
+  background-color: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+}
+
+[data-theme='dark'] .leaflet-popup-tip {
+  background-color: var(--ifm-background-color);
+}
