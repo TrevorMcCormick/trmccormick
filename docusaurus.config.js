@@ -64,7 +64,6 @@ const config = {
         items: [
           {to: '/about', label: 'About', position: 'left'},
           {to: '/', label: 'Blog', position: 'left', activeBaseRegex: '^/$|^/page/|^/\\d{4}/|^/tags/|^/archive'},
-          {to: '/talks', label: 'Talks', position: 'left'},
           {
             href: 'https://github.com/trevormccormick',
             position: 'right',
@@ -92,10 +91,6 @@ const config = {
               {
                 label: 'About',
                 to: '/about',
-              },
-              {
-                label: 'Talks',
-                to: '/talks',
               },
             ],
           },
