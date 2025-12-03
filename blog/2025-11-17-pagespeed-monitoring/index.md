@@ -12,11 +12,11 @@ import InteractiveMermaid from '@site/src/components/InteractiveMermaid';
 
 Because why would I *manually* go to [Page Speed Insights](https://pagespeed.web.dev/) to get my website score?
 
+<!-- truncate -->
+
 Hover over the dots to see the date and click on the commit hash to dig into the report.
 
 <PageSpeedMetrics />
-
-<!-- truncate -->
 
 Here is a simple project that:
 - Uses a GitHub webhook to trigger performance analysis on every push to main

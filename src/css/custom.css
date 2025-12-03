@@ -1,8 +1,10 @@
 /**
  * Custom CSS inspired by johnnyreilly.com design
  * Clean, minimal, professional blog aesthetic
+ * Optimized for performance with critical CSS inlined
  */
 
+/* Critical CSS - Above the fold styles */
 :root {
   --ifm-color-primary: #0ea5e9;
   --ifm-color-primary-dark: #0c94d1;
@@ -101,11 +103,14 @@ article header h2 a:hover {
 .avatar__name,
 .avatar__subtitle {
   font-size: 0.875rem;
+  color: var(--ifm-color-emphasis-900);
+  font-weight: 500;
 }
 
 time {
-  color: var(--ifm-color-emphasis-600);
+  color: var(--ifm-color-emphasis-800);
   font-size: 0.875rem;
+  font-weight: 500;
 }
 
 /* Tag styling */
@@ -116,11 +121,12 @@ time {
 .blog-tags-list a {
   font-size: 0.75rem;
   padding: 0.25rem 0.5rem;
-  background-color: var(--ifm-color-emphasis-100);
+  background-color: var(--ifm-color-emphasis-200);
   border-radius: 0.25rem;
   text-decoration: none;
   margin-right: 0.5rem;
-  color: var(--ifm-color-emphasis-700);
+  color: var(--ifm-color-emphasis-900);
+  font-weight: 500;
 }
 
 .blog-tags-list a:hover {
