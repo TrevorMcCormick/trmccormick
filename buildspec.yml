@@ -33,8 +33,15 @@ phases:
       - aws cloudfront create-invalidation --distribution-id E31546NI4VOO5F --paths '/*'
       - echo Waiting for invalidation to propagate...
       - sleep 30
-      - echo Triggering PageSpeed Insights check...
-      - aws lambda invoke --function-name pagespeed-monitor-collector --region us-east-1 --invocation-type Event /tmp/pagespeed-response.json || echo "PageSpeed check triggered (async)"
+      - echo Checking if PageSpeed trigger is needed...
+      - |
+        COMMIT_MSG=$(git log -1 --pretty=%B)
+        if [[ "$COMMIT_MSG" != *"PageSpeed report"* ]]; then
+          echo "Triggering PageSpeed Insights check..."
+          aws lambda invoke --function-name pagespeed-monitor-collector --region us-east-1 --invocation-type Event /tmp/pagespeed-response.json || echo "PageSpeed check triggered (async)"
+        else
+          echo "Skipping PageSpeed check for report commit"
+        fi
     finally:
       - echo Build finished
 artifacts:
