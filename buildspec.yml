@@ -17,6 +17,7 @@ phases:
       - echo Building...
       - echo Build started on `date`
       - echo Fetching latest PageSpeed metrics from API...
+      - mkdir -p static/data
       - curl -s https://8z1v0z8s97.execute-api.us-east-1.amazonaws.com/metrics -o static/data/pagespeed-metrics.json
       - echo Metrics fetched successfully
       - npm run build
