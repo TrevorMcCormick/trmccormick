@@ -149,6 +149,10 @@ const config = {
     },
   },
   themes: ['@docusaurus/theme-mermaid'],
+
+  plugins: [
+    './src/plugins/critical-css-plugin.js',
+  ],
 };
 
 module.exports = config;
