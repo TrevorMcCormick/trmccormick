@@ -61,23 +61,8 @@ const config = {
     {
       tagName: 'link',
       attributes: {
-        rel: 'preconnect',
-        href: 'https://github.com',
-        crossorigin: 'anonymous',
-      },
-    },
-    {
-      tagName: 'link',
-      attributes: {
         rel: 'dns-prefetch',
         href: 'https://cdnjs.cloudflare.com',
-      },
-    },
-    {
-      tagName: 'link',
-      attributes: {
-        rel: 'dns-prefetch',
-        href: 'https://avatars.githubusercontent.com',
       },
     },
   ],
@@ -90,7 +75,9 @@ const config = {
         title: 'trmccormick',
         logo: {
           alt: 'Trevor McCormick',
-          src: 'https://github.com/trevormccormick.png',
+          src: '/img/trevor-avatar.png',
+          width: 32,
+          height: 32,
           style: {borderRadius: '50%'},
         },
         items: [
