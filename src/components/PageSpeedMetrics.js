@@ -280,6 +280,8 @@ const styles = `
     max-width: 1600px;
     margin: 2rem auto;
     padding: 0 1rem;
+    min-height: 280px;
+    contain: layout;
   }
 
   .loading, .error {

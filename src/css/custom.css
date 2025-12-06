@@ -176,6 +176,17 @@ time {
 /* Clean, minimal article content */
 article img {
   border-radius: 0.5rem;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: attr(width) / attr(height);
+}
+
+/* Prevent CLS from blog post hero images */
+.blog-post-page article img:first-of-type,
+article[itemprop="blogPost"] img:first-of-type {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  object-fit: cover;
 }
 
 article blockquote {

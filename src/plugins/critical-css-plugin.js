@@ -42,6 +42,19 @@ module.exports = function () {
         // Inject loadCSS polyfill before closing head tag for better browser support
         html = html.replace('</head>', `${loadCSSPolyfill}</head>`);
 
+        // Remove lazy loading from first article image to improve LCP
+        // Match first img tag in article and remove loading="lazy" or add fetchpriority="high"
+        html = html.replace(
+          /(<article[^>]*>[\s\S]*?<img[^>]*)(loading="lazy")([^>]*>)/,
+          '$1fetchpriority="high"$3'
+        );
+
+        // Also add fetchpriority to blog post hero images (usually the first img in main content)
+        html = html.replace(
+          /(<div class="[^"]*markdown[^"]*"[^>]*>[\s\S]*?<img)(\s)/,
+          '$1 fetchpriority="high"$2'
+        );
+
         fs.writeFileSync(file, html, 'utf8');
       });
     },

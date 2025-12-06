@@ -152,6 +152,8 @@ export default function InteractiveMermaid({ chart, descriptions }) {
           margin-bottom: 2rem;
           display: flex;
           justify-content: center;
+          min-height: 500px;
+          contain: layout;
         }
 
         .mermaid-diagram svg {
