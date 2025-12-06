@@ -8,9 +8,9 @@ const fs = require('fs');
 const path = require('path');
 const exifr = require('exifr');
 
-const TRAVEL_PHOTOS_DIR = path.join(__dirname, '../static/travel-photos');
+const TRAVEL_PHOTOS_DIR = path.join(__dirname, '../photos');
 const METADATA_FILE = path.join(TRAVEL_PHOTOS_DIR, 'metadata.json');
-const OUTPUT_FILE = path.join(__dirname, '../src/data/photo-locations.json');
+const OUTPUT_FILE = path.join(__dirname, '../../../src/data/photo-locations.json');
 
 // Supported image extensions
 const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.heic', '.heif'];
