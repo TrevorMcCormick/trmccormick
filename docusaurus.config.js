@@ -9,7 +9,7 @@ const darkTheme = themes.dracula;
 const config = {
   title: 'trmccormick',
   tagline: 'Product | Data | Basketball',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.svg',
 
   url: 'https://trmccormick.com',
   baseUrl: '/',

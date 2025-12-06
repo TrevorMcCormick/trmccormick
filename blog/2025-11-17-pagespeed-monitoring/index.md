@@ -7,8 +7,17 @@ image: ./cheetah.webp
 hide_table_of_contents: true
 ---
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import PageSpeedMetrics from '@site/src/components/PageSpeedMetrics';
-import InteractiveMermaid from '@site/src/components/InteractiveMermaid';
+
+const InteractiveMermaid = (props) => (
+  <BrowserOnly fallback={<div style={{minHeight: '500px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8fafc', borderRadius: '8px'}}>Loading diagram...</div>}>
+    {() => {
+      const Component = require('@site/src/components/InteractiveMermaid').default;
+      return <Component {...props} />;
+    }}
+  </BrowserOnly>
+);
 
 Because why would I *manually* go to [Page Speed Insights](https://pagespeed.web.dev/) to get my website score?
 
