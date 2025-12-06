@@ -72,7 +72,7 @@ def handler(event, context):
         # 6. Generate and commit PageSpeed report to repository
         if github_token:  # Only if we have write access
             print(f"Generating PageSpeed report for commit {commit_data['sha'][:7]}")
-            report_path = f"pagespeed-reports/{commit_data['sha']}.md"
+            report_path = f"projects/pagespeed-reports/{commit_data['sha']}.md"
             report_content = generate_pagespeed_report(
                 commit_data=commit_data,
                 desktop_metrics=desktop_metrics,

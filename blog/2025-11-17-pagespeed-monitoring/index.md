@@ -52,7 +52,7 @@ graph TB
 
     subgraph storage["Data Storage"]
       dynamodb[("DynamoDB")]
-      github-repo["GitHub Repo<br/><small>pagespeed-reports/</small>"]
+      github-repo["GitHub Repo<br/><small>projects/pagespeed-reports/</small>"]
     end
 
     subgraph alerting["Alerting"]
@@ -135,7 +135,7 @@ graph TB
       description: "NoSQL table storing performance metrics, Core Web Vitals, and commit metadata with timestamp-based keys for historical tracking.",
     },
     "github-repo": {
-      title: "GitHub Repository (pagespeed-reports/)",
+      title: "GitHub Repository (projects/pagespeed-reports/)",
       description: "Version-controlled storage of all PageSpeed reports. Each push to main generates a new report file named by commit SHA, creating a permanent audit trail of performance over time.",
     },
     apigateway: {

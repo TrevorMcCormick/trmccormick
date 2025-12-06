@@ -47,7 +47,7 @@ tmp/
 temp/
 
 # Generated PageSpeed reports
-pagespeed-reports/
+projects/pagespeed-reports/
 
 # Generated PageSpeed metrics data (fetched at build time)
 static/data/
