@@ -42,6 +42,28 @@ module.exports = function () {
         // Inject loadCSS polyfill before closing head tag for better browser support
         html = html.replace('</head>', `${loadCSSPolyfill}</head>`);
 
+        // Add width/height to avatar images to prevent CLS
+        html = html.replace(
+          /<img([^>]*class="[^"]*avatar__photo[^"]*"[^>]*)>/g,
+          (match, attrs) => {
+            if (!attrs.includes('width=') && !attrs.includes('height=')) {
+              return `<img${attrs} width="48" height="48">`;
+            }
+            return match;
+          }
+        );
+
+        // Add width/height to navbar logo images
+        html = html.replace(
+          /<img([^>]*class="[^"]*themedComponent[^"]*"[^>]*)>/g,
+          (match, attrs) => {
+            if (!attrs.includes('width=') && !attrs.includes('height=')) {
+              return `<img${attrs} width="32" height="32">`;
+            }
+            return match;
+          }
+        );
+
         fs.writeFileSync(file, html, 'utf8');
       });
     },
