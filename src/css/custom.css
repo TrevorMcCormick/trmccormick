@@ -4,6 +4,11 @@
  * Optimized for performance with critical CSS inlined
  */
 
+/* Font display optimization */
+@font-face {
+  font-display: swap;
+}
+
 /* Critical CSS - Above the fold styles */
 :root {
   --ifm-color-primary: #0ea5e9;
@@ -107,6 +112,18 @@ article header h2 a:hover {
   font-weight: 500;
 }
 
+/* Avatar image - maintain circular shape */
+.avatar__photo,
+.avatar__photo-link img {
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px;
+  min-height: 48px;
+  border-radius: 50% !important;
+  object-fit: cover;
+  aspect-ratio: 1 / 1 !important;
+}
+
 time {
   color: var(--ifm-color-emphasis-800);
   font-size: 0.875rem;
@@ -173,20 +190,18 @@ time {
   background-color: var(--ifm-color-primary-lightest);
 }
 
-/* Clean, minimal article content */
-article img {
+/* Clean, minimal article content - exclude avatar images */
+article img:not(.avatar__photo):not([class*="avatar"]) {
   border-radius: 0.5rem;
   max-width: 100%;
   height: auto;
-  aspect-ratio: attr(width) / attr(height);
 }
 
-/* Prevent CLS from blog post hero images */
-.blog-post-page article img:first-of-type,
-article[itemprop="blogPost"] img:first-of-type {
-  aspect-ratio: 16 / 9;
-  width: 100%;
-  object-fit: cover;
+/* Blog post content images - reserve space to prevent CLS */
+.markdown img,
+article .markdown img {
+  aspect-ratio: auto;
+  contain: layout;
 }
 
 article blockquote {
