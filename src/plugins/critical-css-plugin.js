@@ -88,6 +88,32 @@ module.exports = function () {
           }
         );
 
+        // Add inline styles to navbar to prevent height expansion before CSS loads
+        // The navbar expands from ~170px to 60px when CSS loads, causing 172px CLS
+        html = html.replace(
+          /<nav([^>]*class="[^"]*navbar[^"]*"[^>]*)>/g,
+          (match, attrs) => {
+            const navbarStyles = 'height: 60px; display: flex; align-items: center;';
+            if (attrs.includes('style=')) {
+              return match.replace(/style="([^"]*)"/, `style="$1 ${navbarStyles}"`);
+            }
+            return `<nav${attrs} style="${navbarStyles}">`;
+          }
+        );
+
+        // Add inline styles to main wrapper to fix positioning relative to navbar
+        html = html.replace(
+          /<div([^>]*id="__docusaurus_skipToContent_fallback"[^>]*)>/g,
+          (match, attrs) => {
+            // Ensure consistent top margin/padding regardless of CSS load timing
+            const wrapperStyles = 'padding-top: 0;';
+            if (attrs.includes('style=')) {
+              return match.replace(/style="([^"]*)"/, `style="$1 ${wrapperStyles}"`);
+            }
+            return `<div${attrs} style="${wrapperStyles}">`;
+          }
+        );
+
         fs.writeFileSync(file, html, 'utf8');
       });
     },

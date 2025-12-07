@@ -379,6 +379,7 @@ const styles = `
     background: white;
     padding: 2rem 0;
     position: relative;
+    min-height: 400px; /* Reserve space to prevent CLS */
   }
 
   .chart-grid {
@@ -391,6 +392,7 @@ const styles = `
 
   .small-chart-wrapper {
     min-width: 0;
+    min-height: 150px; /* Reserve space to prevent CLS when charts load */
   }
 
   .small-chart {
