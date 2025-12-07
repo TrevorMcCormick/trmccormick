@@ -64,16 +64,27 @@ module.exports = function () {
           }
         );
 
-        // Add inline style to body to prevent CLS from useLockBodyScroll hook
-        // This must be inline because our CSS loads async
+        // Add inline styles to html/body to prevent CLS from async CSS loading
+        // These critical layout styles must be inline because CSS loads after first paint
+        html = html.replace(
+          /<html([^>]*)>/,
+          (match, attrs) => {
+            if (attrs.includes('style=')) {
+              return match.replace(/style="([^"]*)"/, 'style="$1 margin: 0; padding: 0;"');
+            }
+            return `<html${attrs} style="margin: 0; padding: 0;">`;
+          }
+        );
+
         html = html.replace(
           /<body([^>]*)>/,
           (match, attrs) => {
+            // Critical styles: margin/padding to prevent 16px shift, overflow for scroll lock
+            const criticalStyles = 'margin: 0; padding: 0; overflow: visible;';
             if (attrs.includes('style=')) {
-              // Append to existing style
-              return match.replace(/style="([^"]*)"/, 'style="$1 overflow: visible;"');
+              return match.replace(/style="([^"]*)"/, `style="$1 ${criticalStyles}"`);
             }
-            return `<body${attrs} style="overflow: visible;">`;
+            return `<body${attrs} style="${criticalStyles}">`;
           }
         );
 
