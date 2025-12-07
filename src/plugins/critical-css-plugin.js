@@ -1,6 +1,6 @@
 module.exports = function () {
   return {
-    name: 'non-blocking-css-plugin',
+    name: 'image-dimensions-plugin',
 
     postBuild({outDir}) {
       const fs = require('fs');
@@ -27,20 +27,8 @@ module.exports = function () {
 
       const htmlFiles = findHtmlFiles(outDir);
 
-      // loadCSS polyfill for better browser support
-      const loadCSSPolyfill = `<script>!function(e){"use strict";var t=function(t,n,r,o){var i,a=e.document,d=a.createElement("link");if(n)i=n;else{var s=(a.body||a.getElementsByTagName("head")[0]).childNodes;i=s[s.length-1]}var l=a.styleSheets;if(o)for(var f in o)o.hasOwnProperty(f)&&d.setAttribute(f,o[f]);d.rel="stylesheet",d.href=t,d.media="only x",function e(t){if(a.body)return t();setTimeout(function(){e(t)})}(function(){i.parentNode.insertBefore(d,n?i:i.nextSibling)});var u=function(e){for(var t=d.href,n=l.length;n--;)if(l[n].href===t)return e();setTimeout(function(){u(e)})};return d.addEventListener&&d.addEventListener("load",function(){this.media=r||"all"}),d.onloadcssdefined=u,u(function(){d.media!==r&&(d.media=r||"all")}),d};"undefined"!=typeof exports?exports.loadCSS=t:e.loadCSS=t}("undefined"!=typeof global?global:this);</script>`;
-
       htmlFiles.forEach((file) => {
         let html = fs.readFileSync(file, 'utf8');
-
-        // Replace stylesheet links with preload + onload pattern
-        html = html.replace(
-          /<link rel="stylesheet" href="([^"]+\.css)">/g,
-          '<link rel="preload" href="$1" as="style" onload="this.onload=null;this.rel=\'stylesheet\'"><noscript><link rel="stylesheet" href="$1"></noscript>'
-        );
-
-        // Inject loadCSS polyfill before closing head tag for better browser support
-        html = html.replace('</head>', `${loadCSSPolyfill}</head>`);
 
         // Add width/height to avatar images to prevent CLS
         html = html.replace(
@@ -61,56 +49,6 @@ module.exports = function () {
               return `<img${attrs} width="32" height="32">`;
             }
             return match;
-          }
-        );
-
-        // Add inline styles to html/body to prevent CLS from async CSS loading
-        // These critical layout styles must be inline because CSS loads after first paint
-        html = html.replace(
-          /<html([^>]*)>/,
-          (match, attrs) => {
-            if (attrs.includes('style=')) {
-              return match.replace(/style="([^"]*)"/, 'style="$1 margin: 0; padding: 0;"');
-            }
-            return `<html${attrs} style="margin: 0; padding: 0;">`;
-          }
-        );
-
-        html = html.replace(
-          /<body([^>]*)>/,
-          (match, attrs) => {
-            // Critical styles: margin/padding to prevent 16px shift, overflow for scroll lock
-            const criticalStyles = 'margin: 0; padding: 0; overflow: visible;';
-            if (attrs.includes('style=')) {
-              return match.replace(/style="([^"]*)"/, `style="$1 ${criticalStyles}"`);
-            }
-            return `<body${attrs} style="${criticalStyles}">`;
-          }
-        );
-
-        // Add inline styles to navbar to prevent height expansion before CSS loads
-        // The navbar expands from ~170px to 60px when CSS loads, causing 172px CLS
-        html = html.replace(
-          /<nav([^>]*class="[^"]*navbar[^"]*"[^>]*)>/g,
-          (match, attrs) => {
-            const navbarStyles = 'height: 60px; display: flex; align-items: center;';
-            if (attrs.includes('style=')) {
-              return match.replace(/style="([^"]*)"/, `style="$1 ${navbarStyles}"`);
-            }
-            return `<nav${attrs} style="${navbarStyles}">`;
-          }
-        );
-
-        // Add inline styles to main wrapper to fix positioning relative to navbar
-        html = html.replace(
-          /<div([^>]*id="__docusaurus_skipToContent_fallback"[^>]*)>/g,
-          (match, attrs) => {
-            // Ensure consistent top margin/padding regardless of CSS load timing
-            const wrapperStyles = 'padding-top: 0;';
-            if (attrs.includes('style=')) {
-              return match.replace(/style="([^"]*)"/, `style="$1 ${wrapperStyles}"`);
-            }
-            return `<div${attrs} style="${wrapperStyles}">`;
           }
         );
 
