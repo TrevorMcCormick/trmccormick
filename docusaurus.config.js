@@ -154,6 +154,19 @@ const config = {
 
   plugins: [
     './src/plugins/critical-css-plugin.js',
+    function sourceMapPlugin() {
+      return {
+        name: 'source-map-plugin',
+        configureWebpack(_config, isServer) {
+          if (!isServer) {
+            return {
+              devtool: 'source-map',
+            };
+          }
+          return {};
+        },
+      };
+    },
   ],
 };
 

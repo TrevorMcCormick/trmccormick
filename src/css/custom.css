@@ -11,6 +11,13 @@ body {
   overflow: visible;
 }
 
+/* Prevent deprecated H1UserAgentFontSizeInSection warning */
+/* Explicitly size h1 to avoid browser auto-resizing in sectioning elements */
+article h1,
+section h1 {
+  font-size: 2rem;
+}
+
 :root {
   --ifm-color-primary: #0ea5e9;
   --ifm-color-primary-dark: #0c94d1;
