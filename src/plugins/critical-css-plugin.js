@@ -64,6 +64,19 @@ module.exports = function () {
           }
         );
 
+        // Add inline style to body to prevent CLS from useLockBodyScroll hook
+        // This must be inline because our CSS loads async
+        html = html.replace(
+          /<body([^>]*)>/,
+          (match, attrs) => {
+            if (attrs.includes('style=')) {
+              // Append to existing style
+              return match.replace(/style="([^"]*)"/, 'style="$1 overflow: visible;"');
+            }
+            return `<body${attrs} style="overflow: visible;">`;
+          }
+        );
+
         fs.writeFileSync(file, html, 'utf8');
       });
     },
