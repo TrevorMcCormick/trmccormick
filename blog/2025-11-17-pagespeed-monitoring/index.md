@@ -28,7 +28,7 @@ Here is a simple project that:
 
 Here's how it works (click on the boxes to read more):
 
-### Architecture
+## Architecture
 
 <InteractiveMermaid
   chart={`%%{init: {'theme':'base', 'themeVariables': { 'clusterBkg':'#f8fafc', 'clusterBorder':'#cbd5e1', 'edgeLabelBackground':'#ffffff'}, 'flowchart': {'nodeSpacing': 35, 'rankSpacing': 55}}}%%

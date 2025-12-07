@@ -19,13 +19,14 @@ section h1 {
 }
 
 :root {
-  --ifm-color-primary: #0ea5e9;
-  --ifm-color-primary-dark: #0c94d1;
-  --ifm-color-primary-darker: #0b8cc5;
-  --ifm-color-primary-darkest: #0973a3;
-  --ifm-color-primary-light: #10b6ff;
-  --ifm-color-primary-lighter: #1cbeff;
-  --ifm-color-primary-lightest: #3ec8ff;
+  /* Primary color chosen for WCAG AA contrast (5.93:1 against white) */
+  --ifm-color-primary: #0369a1;
+  --ifm-color-primary-dark: #075985;
+  --ifm-color-primary-darker: #0c4a6e;
+  --ifm-color-primary-darkest: #083344;
+  --ifm-color-primary-light: #0284c7;
+  --ifm-color-primary-lighter: #0ea5e9;
+  --ifm-color-primary-lightest: #38bdf8;
 
   --ifm-code-font-size: 95%;
   --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
@@ -38,13 +39,14 @@ section h1 {
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #0ea5e9;
-  --ifm-color-primary-dark: #0c94d1;
-  --ifm-color-primary-darker: #0b8cc5;
-  --ifm-color-primary-darkest: #0973a3;
-  --ifm-color-primary-light: #10b6ff;
-  --ifm-color-primary-lighter: #1cbeff;
-  --ifm-color-primary-lightest: #3ec8ff;
+  /* Lighter blue for dark mode - maintains contrast against dark backgrounds */
+  --ifm-color-primary: #38bdf8;
+  --ifm-color-primary-dark: #0ea5e9;
+  --ifm-color-primary-darker: #0284c7;
+  --ifm-color-primary-darkest: #0369a1;
+  --ifm-color-primary-light: #7dd3fc;
+  --ifm-color-primary-lighter: #bae6fd;
+  --ifm-color-primary-lightest: #e0f2fe;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
