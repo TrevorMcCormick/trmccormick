@@ -5,6 +5,12 @@
  */
 
 /* Critical CSS - Above the fold styles */
+
+/* Prevent CLS from Docusaurus useLockBodyScroll hook */
+body {
+  overflow: visible;
+}
+
 :root {
   --ifm-color-primary: #0ea5e9;
   --ifm-color-primary-dark: #0c94d1;
