@@ -280,6 +280,7 @@ const styles = `
     max-width: 1600px;
     margin: 2rem auto;
     padding: 0 1rem;
+    min-height: 500px; /* Reserve space to prevent CLS */
   }
 
   .loading, .error {
@@ -287,6 +288,10 @@ const styles = `
     text-align: center;
     border-radius: 8px;
     margin: 2rem 0;
+    min-height: 460px; /* Match container height to prevent CLS */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .loading {
