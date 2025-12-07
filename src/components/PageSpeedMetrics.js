@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
-import metricsData from '@site/static/data/pagespeed-metrics.json';
+import React, { useState, useEffect } from 'react';
+
+const API_URL = 'https://8z1v0z8s97.execute-api.us-east-1.amazonaws.com/metrics';
 
 export default function PageSpeedMetrics() {
-  const [viewMode, setViewMode] = useState('mobile'); // 'mobile' or 'desktop'
+  const [viewMode, setViewMode] = useState('mobile');
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Data is now loaded at build time
-  const data = metricsData;
-  const loading = false;
-  const error = null;
+  // Fetch metrics from API at runtime for always-fresh data
+  useEffect(() => {
+    fetch(API_URL)
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch metrics');
+        return res.json();
+      })
+      .then(json => {
+        setData(json);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
 
   if (loading) {
     return (
