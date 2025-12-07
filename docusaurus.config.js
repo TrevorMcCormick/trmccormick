@@ -51,13 +51,7 @@ const config = {
   ],
 
   headTags: [
-    {
-      tagName: 'link',
-      attributes: {
-        rel: 'preconnect',
-        href: 'https://fonts.googleapis.com',
-      },
-    },
+    // Note: Using system fonts, no external font preconnect needed
     {
       tagName: 'link',
       attributes: {
