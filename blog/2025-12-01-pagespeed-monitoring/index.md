@@ -1,6 +1,6 @@
 ---
 title: "Automating PageSpeed Insights Scores"
-description: "Build a serverless PageSpeed monitoring system with AWS Lambda, DynamoDB, and SNS alerts."
+description: "How I built a serverless PageSpeed monitoring system with AWS Lambda, DynamoDB, and SNS alerts."
 date: 2025-12-01
 authors: [trevor]
 tags: [aws, data-engineering]
@@ -113,7 +113,7 @@ graph TB
     },
     "lambda-collector": {
       title: "Lambda Collector",
-      description: "Orchestrates data collection by querying PageSpeed Insights API for both mobile and desktop scores, comparing with previous metrics to detect score drops, sending alerts via SNS when thresholds are exceeded, persisting results to DynamoDB, and generating detailed markdown reports that get committed back to the repository.",
+      description: "Orchestrates the data collection pipeline:\n\n• Queries PageSpeed Insights API for mobile and desktop scores\n• Compares with previous metrics to detect score drops\n• Sends alerts via SNS when thresholds are exceeded\n• Persists results to DynamoDB\n• Generates markdown reports committed back to the repo",
     },
     sns: {
       title: "SNS Topic",
@@ -121,11 +121,11 @@ graph TB
     },
     email: {
       title: "Email Alerts",
-      description: "Email notifications sent when any PageSpeed score (Performance, Accessibility, Best Practices, or SEO) drops by more than the configured threshold on mobile or desktop. Includes before/after scores, affected categories, and commit information for quick investigation.",
+      description: "Email notifications sent when any PageSpeed score drops by more than the configured threshold on mobile or desktop.",
     },
     pagespeed: {
       title: "PageSpeed Insights API",
-      description: "Google's Lighthouse-powered API that returns performance scores and Core Web Vitals metrics:\n\n• <strong>Largest Contentful Paint (LCP)</strong>:\n&nbsp;&nbsp;&nbsp;&nbsp;Time until the largest content element becomes visible\n• <strong>First Contentful Paint (FCP)</strong>:\n&nbsp;&nbsp;&nbsp;&nbsp;Time until first content renders\n• <strong>Cumulative Layout Shift (CLS)</strong>:\n&nbsp;&nbsp;&nbsp;&nbsp;Measures visual stability\n• <strong>Total Blocking Time (TBT)</strong>:\n&nbsp;&nbsp;&nbsp;&nbsp;Tracks main thread blocking\n• <strong>Speed Index (SI)</strong>:\n&nbsp;&nbsp;&nbsp;&nbsp;How quickly content is visually displayed",
+      description: "Google's Lighthouse API that returns performance scores and Core Web Vitals metrics:\n\n• <strong>Largest Contentful Paint (LCP)</strong>:\n&nbsp;&nbsp;&nbsp;&nbsp;Time until the largest content element becomes visible\n• <strong>First Contentful Paint (FCP)</strong>:\n&nbsp;&nbsp;&nbsp;&nbsp;Time until first content renders\n• <strong>Cumulative Layout Shift (CLS)</strong>:\n&nbsp;&nbsp;&nbsp;&nbsp;Measures visual stability\n• <strong>Total Blocking Time (TBT)</strong>:\n&nbsp;&nbsp;&nbsp;&nbsp;Tracks main thread blocking\n• <strong>Speed Index (SI)</strong>:\n&nbsp;&nbsp;&nbsp;&nbsp;How quickly content is visually displayed",
     },
     "github-api": {
       title: "GitHub API",
@@ -133,15 +133,15 @@ graph TB
     },
     dynamodb: {
       title: "DynamoDB",
-      description: "NoSQL table storing performance metrics, Core Web Vitals, and commit metadata with timestamp-based keys for historical tracking.",
+      description: "Database storing website performance metrics and commit metadata with timestamp-based keys for historical tracking.",
     },
     "github-repo": {
-      title: "GitHub Repository (projects/pagespeed-reports/)",
-      description: "Version-controlled storage of all PageSpeed reports. Each push to main generates a new report file named by commit SHA, creating a permanent audit trail of performance over time.",
+      title: "GitHub Repository",
+      description: "Version-controlled storage of all PageSpeed reports.",
     },
     apigateway: {
       title: "API Gateway Metrics Endpoint",
-      description: "HTTP API exposing DynamoDB metrics to the frontend with CORS support for cross-origin requests from the blog.",
+      description: "HTTP API exposing DynamoDB metrics",
     },
     "lambda-api": {
       title: "Lambda API Handler",
@@ -149,7 +149,7 @@ graph TB
     },
     page: {
       title: "This Blog Post",
-      description: "React component that displays performance data fetched at build time from a static JSON file. Data is pre-fetched from the API during the Docusaurus build process, eliminating client-side API calls and improving page load performance.",
+      description: "React component that fetches performance data from the API at runtime for always-fresh metrics. Falls back to static build-time data if the API is unavailable.",
     }
   }}
 />
