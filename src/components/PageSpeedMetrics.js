@@ -299,7 +299,6 @@ const styles = `
     max-width: 1600px;
     margin: 2rem auto;
     padding: 0 1rem;
-    min-height: 500px; /* Reserve space to prevent CLS */
   }
 
   .loading, .error {
@@ -307,10 +306,6 @@ const styles = `
     text-align: center;
     border-radius: 8px;
     margin: 2rem 0;
-    min-height: 460px; /* Match container height to prevent CLS */
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .loading {
@@ -398,7 +393,6 @@ const styles = `
     background: white;
     padding: 2rem 0;
     position: relative;
-    min-height: 400px; /* Reserve space to prevent CLS */
   }
 
   .chart-grid {
@@ -411,7 +405,6 @@ const styles = `
 
   .small-chart-wrapper {
     min-width: 0;
-    min-height: 50px; /* Reserve space to prevent CLS when charts load */
   }
 
   .small-chart {
