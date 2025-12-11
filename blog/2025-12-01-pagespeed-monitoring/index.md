@@ -1,9 +1,10 @@
 ---
 title: "Automating PageSpeed Insights Scores"
-date: 2025-11-17
+description: "Build a serverless PageSpeed monitoring system with AWS Lambda, DynamoDB, and SNS alerts. Track your Core Web Vitals automatically after every deploy."
+date: 2025-12-01
 authors: [trevor]
-tags: [aws, performance, monitoring, lambda, dynamodb, api-gateway, sns, alerting]
-image: ./cheetah.webp
+tags: [aws, data-engineering]
+image: /img/social/2025-12-01-pagespeed-monitoring.png
 hide_table_of_contents: true
 ---
 

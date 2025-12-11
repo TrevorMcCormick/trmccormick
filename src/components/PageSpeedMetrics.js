@@ -408,7 +408,7 @@ const styles = `
 
   .small-chart-wrapper {
     min-width: 0;
-    min-height: 150px; /* Reserve space to prevent CLS when charts load */
+    min-height: 50px; /* Reserve space to prevent CLS when charts load */
   }
 
   .small-chart {
