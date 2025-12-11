@@ -1,6 +1,6 @@
 ---
 title: "Automating PageSpeed Insights Scores"
-description: "Build a serverless PageSpeed monitoring system with AWS Lambda, DynamoDB, and SNS alerts. Track your Core Web Vitals automatically after every deploy."
+description: "Build a serverless PageSpeed monitoring system with AWS Lambda, DynamoDB, and SNS alerts."
 date: 2025-12-01
 authors: [trevor]
 tags: [aws, data-engineering]

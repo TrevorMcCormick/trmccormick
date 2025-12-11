@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import fallbackData from '@site/static/data/pagespeed-metrics.json';
 
 const API_URL = 'https://8z1v0z8s97.execute-api.us-east-1.amazonaws.com/metrics';
 
@@ -9,6 +10,7 @@ export default function PageSpeedMetrics() {
   const [error, setError] = useState(null);
 
   // Fetch metrics from API at runtime for always-fresh data
+  // Falls back to static build-time data if API fails (e.g., CORS in dev mode)
   useEffect(() => {
     fetch(API_URL)
       .then(res => {
@@ -19,8 +21,9 @@ export default function PageSpeedMetrics() {
         setData(json);
         setLoading(false);
       })
-      .catch(err => {
-        setError(err.message);
+      .catch(() => {
+        // Fallback to static data (useful in dev mode when API has CORS issues)
+        setData(fallbackData);
         setLoading(false);
       });
   }, []);
