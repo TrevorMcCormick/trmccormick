@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "prestart": "node scripts/fetch-pagespeed-metrics.js && node projects/travel-map/scripts/extract-photo-locations.js",
+    "prestart": "node projects/travel-map/scripts/extract-photo-locations.js",
     "start": "docusaurus start",
-    "prebuild": "node scripts/fetch-pagespeed-metrics.js && node projects/travel-map/scripts/extract-photo-locations.js && node scripts/generate-social-cards.js",
+    "prebuild": "node projects/travel-map/scripts/extract-photo-locations.js && node scripts/generate-social-cards.js",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
