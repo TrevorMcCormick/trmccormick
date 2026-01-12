@@ -16,10 +16,6 @@ phases:
     commands:
       - echo Building...
       - echo Build started on `date`
-      - echo Fetching latest PageSpeed metrics from API...
-      - mkdir -p static/data
-      - curl -s https://8z1v0z8s97.execute-api.us-east-1.amazonaws.com/metrics -o static/data/pagespeed-metrics.json
-      - echo Metrics fetched successfully
       - npm run build
       - echo Uploading with optimized cache headers...
       # Sync files with appropriate cache headers (no --delete on individual syncs to avoid conflicts)
@@ -32,17 +28,6 @@ phases:
       - aws s3 sync --delete build/ s3://trmccormick.com
       - echo Creating CloudFront invalidation...
       - aws cloudfront create-invalidation --distribution-id E31546NI4VOO5F --paths '/*'
-      - echo Waiting for invalidation to propagate...
-      - sleep 30
-      - echo Checking if PageSpeed trigger is needed...
-      - |
-        COMMIT_MSG=$(git log -1 --pretty=%B)
-        if [[ "$COMMIT_MSG" != *"PageSpeed report"* ]]; then
-          echo "Triggering PageSpeed Insights check..."
-          aws lambda invoke --function-name pagespeed-monitor-collector --region us-east-1 --invocation-type Event /tmp/pagespeed-response.json || echo "PageSpeed check triggered (async)"
-        else
-          echo "Skipping PageSpeed check for report commit"
-        fi
     finally:
       - echo Build finished
 artifacts:
